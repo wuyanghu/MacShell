@@ -32,6 +32,7 @@
     [super viewDidLoad];
     //1
     //2
+    //3
     [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择目录"];
     // Do any additional setup after loading the view.
     self.chensongButtonCell.state = [self.auditPersonDictionary[kChensong] intValue];
