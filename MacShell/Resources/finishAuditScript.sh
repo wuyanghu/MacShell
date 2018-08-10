@@ -27,10 +27,10 @@ function pushOrigin ()
 #        git pull origin $brench
         git push -u origin $brench
 
-        提交完后移除文件
+#        提交完后移除文件
         rm $sandbox_path/branch.txt
         rm $sandbox_path/output.txt
-        rm $$sandbox_path/commitParam.txt
+        rm $sandbox_path/commitParam.txt
     else
         echo "push本地文件有修改,不能提交"
     fi
