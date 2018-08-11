@@ -31,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //1
-    //2
     
     [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择目录"];
     // Do any additional setup after loading the view.
