@@ -10,7 +10,6 @@
 
 #define kChensong @"chensong"
 #define kShezhiqiang @"shezhiqiang"
-#define kYuanrunli @"yuanrunli"
 
 #define kChooseFilePath @"chooseFilePath"//缓存选择文件的路径
 

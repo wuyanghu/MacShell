@@ -77,7 +77,7 @@
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary * auditInfoDict = [userDefaults objectForKey:@"auditInfoDict"];
     if (!auditInfoDict) {
-        NSDictionary * initAuditInfoDict = @{kChensong:@"1",kShezhiqiang:@"1",kYuanrunli:@"1"};
+        NSDictionary * initAuditInfoDict = @{kChensong:@"1",kShezhiqiang:@"1"};
         [self storageAuditInfo:[[NSMutableDictionary alloc] initWithDictionary:initAuditInfoDict]];
         return initAuditInfoDict;
     }

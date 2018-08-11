@@ -10,19 +10,20 @@
 #import "Help.h"
 #import "FileCache.h"
 
-@interface ViewController()
-@property (unsafe_unretained) IBOutlet NSTextView *textView; //信息录入框
+#import "CheckViewController.h"
+
+@interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
 @property (weak) IBOutlet NSButton *chooseDirectoryButton;//工程目录
-
-@property (weak) IBOutlet NSButtonCell *chensongButtonCell;
-@property (weak) IBOutlet NSButtonCell *shezhiqiangButtonCell;
-@property (weak) IBOutlet NSButtonCell *yuanrunliButtonCell;
-
+@property (weak) IBOutlet NSStackView *stackView;
+@property (unsafe_unretained) IBOutlet NSTextView *textView; //信息录入框
+@property (weak) IBOutlet NSTextField *placeLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatorView;//菊花圈
 
-@property (nonatomic,strong) NSMutableDictionary * auditPersonDictionary;
+@property (nonatomic,strong) NSMutableDictionary<NSString *,NSTextField*> * cacheLabelDict;
 
+@property (nonatomic,strong) NSMutableDictionary * auditPersonDictionary;
 @property (nonatomic,copy) NSString * chooseFilePath;//选择路径
+
 
 @end
 
@@ -30,36 +31,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //1
-    //2
-    //3
-    //4
-    //5
-    //6
-    //7
+    self.textView.delegate = self;
     [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择目录"];
-    // Do any additional setup after loading the view.
-    self.chensongButtonCell.state = [self.auditPersonDictionary[kChensong] intValue];
-    self.shezhiqiangButtonCell.state = [self.auditPersonDictionary[kShezhiqiang] intValue];
-    self.yuanrunliButtonCell.state = [self.auditPersonDictionary[kYuanrunli] intValue];
-    
+    // Do any additional setup after loading the view
+    NSDictionary * auditInfoDict = [Help getAuditInfo];
+    [auditInfoDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSInteger value = [obj integerValue];
+        NSString * key1 = (NSString *)key;
+        if (value == 1) {
+            NSTextField * label = [self createLabel:key1];
+            [self.stackView addView:label inGravity:NSStackViewGravityLeading];
+            [self.cacheLabelDict setObject:label forKey:key1];
+        }
+    }];
 }
 
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-
     // Update the view, if already loaded.
+}
+
+- (NSTextField *)createLabel:(NSString *)text{
+    NSTextField * label = [[NSTextField alloc]init];
+    label.editable = NO;
+    label.bordered = NO; //不显示边框
+    label.backgroundColor = [NSColor clearColor]; //控件背景色
+    label.textColor = [NSColor blackColor];  //文字颜色
+    label.stringValue = text;
+    return label;
+}
+
+- (void)showAlertCheckVC{
+    CheckViewController * checkVC = [[CheckViewController alloc] initWithNibName:@"CheckViewController" bundle:nil];
+    checkVC.delegate = self;
+    [[NSApplication sharedApplication].keyWindow.contentViewController presentViewControllerAsModalWindow:checkVC];;
 }
 
 #pragma mark - action
 
 - (IBAction)startAuditAction:(id)sender {
+    NSButton * button = (NSButton *)sender;
+    button.enabled = NO;
+    
     if (!self.chooseFilePath) {
         [self showAlertView:@"请选择工程目录!"];
         return;
     }
-    
     
     __block NSUInteger chooseAuditCount = 0;
     __block NSString * auditPersonStr = @"";//审核人信息
@@ -91,6 +109,9 @@
     self.progressIndicatorView.hidden = NO;
     [self.progressIndicatorView startAnimation:nil];
     [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            button.enabled = YES;
+        });
         [self hideProgressView];
         
         NSString * outputTxt = [FileCache readFile:@"output.txt"];
@@ -105,11 +126,17 @@
 }
 
 - (IBAction)finishAuditAction:(id)sender {
+    NSButton * button  = (NSButton *)sender;
+    button.enabled = NO;
+    
     NSString * projectPathStr = [self.chooseFilePath substringFromIndex:7];//工程路径
     NSArray * array = @[@"finishAuditScript.sh",projectPathStr,[FileCache getDoucumentPath]];
     self.progressIndicatorView.hidden = NO;
     [self.progressIndicatorView startAnimation:nil];
     [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            button.enabled = YES;
+        });
         [self hideProgressView];
         
         [self showAlertView:resultStr];
@@ -118,12 +145,11 @@
 
 - (IBAction)chooseDirectoryAction:(id)sender {
     NSOpenPanel* panel = [NSOpenPanel openPanel];
-    [panel setDirectory:NSHomeDirectory()];//保存文件路径
+    [panel setDirectory:self.chooseFilePath];//保存文件路径
     panel.canCreateDirectories = YES;//是否可以创建文件夹
     panel.canChooseDirectories = YES;//是否可以选择文件夹
     panel.canChooseFiles = NO;//是否可以选择文件
     [panel setAllowsMultipleSelection:NO];//是否可以多选
-    panel.directoryURL = [NSURL URLWithString:self.chooseFilePath];
     //显示
     [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
         //是否点击open 按钮
@@ -139,22 +165,42 @@
     
 }
 
-- (IBAction)chensongAction:(id)sender {
-    NSLog(@"state=%ld",self.chensongButtonCell.state);
-    [self.auditPersonDictionary setObject:@(self.chensongButtonCell.state) forKey:kChensong];
+- (IBAction)auditListAction:(id)sender {
+    [self showAlertCheckVC];
+}
+
+#pragma mark - CheckVCDelegate
+
+- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle{
+    NSLog(@"%@-%ld",checkTitle,button.state);
+    if (self.cacheLabelDict.allKeys.count==5 && button.state == 1) {
+        button.state = 0;
+        [self showAlertView:@"审核人最多只能选择5个"];
+        return;
+    }
+   
+    if (button.state == 1) {
+        NSTextField * label = [self createLabel:checkTitle];
+        [self.stackView addView:label inGravity:NSStackViewGravityLeading];
+        [self.cacheLabelDict setObject:label forKey:checkTitle];
+    }else{
+        NSTextField * label = self.cacheLabelDict[checkTitle];
+        [self.stackView removeView:label];
+        [self.cacheLabelDict removeObjectForKey:checkTitle];
+    }
+    [self.auditPersonDictionary setObject:@(button.state) forKey:checkTitle];
     [Help storageAuditInfo:self.auditPersonDictionary];
 }
 
-- (IBAction)shezhiqiangAction:(id)sender {
-    NSLog(@"state=%ld",self.shezhiqiangButtonCell.state);
-    [self.auditPersonDictionary setObject:@(self.shezhiqiangButtonCell.state) forKey:kShezhiqiang];
-    [Help storageAuditInfo:self.auditPersonDictionary];
-}
+#pragma mark - NSTextViewDelegate
 
-- (IBAction)yuanrunliAction:(id)sender {
-    NSLog(@"state=%ld",self.yuanrunliButtonCell.state);
-    [self.auditPersonDictionary setObject:@(self.yuanrunliButtonCell.state) forKey:kYuanrunli];
-    [Help storageAuditInfo:self.auditPersonDictionary];
+- (void)textDidChange:(NSNotification *)notification{
+    NSTextView * textView = (NSTextView *)notification.object;
+    if ([textView.string isEqualToString:@""]) {
+        self.placeLabel.hidden = NO;
+    }else{
+        self.placeLabel.hidden = YES;
+    }
 }
 
 #pragma mark - private mothod
@@ -217,6 +263,13 @@
 }
 
 #pragma mark - getter
+
+- (NSMutableDictionary<NSString *,NSTextField *> *)cacheLabelDict{
+    if (!_cacheLabelDict) {
+        _cacheLabelDict = [[NSMutableDictionary alloc] init];
+    }
+    return _cacheLabelDict;
+}
 
 - (NSString *)chooseFilePath{
     _chooseFilePath = [Help getFilePath];
