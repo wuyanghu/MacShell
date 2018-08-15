@@ -24,7 +24,7 @@ function pushOrigin ()
         git branch 2>&1 | tee $sandbox_path""/branch.txt
 
         cat $sandbox_path""/branch.txt | read branch
-#        git pull origin $brench
+        git pull --rebase origin $brench
         git push -u origin $brench
 
         #提交完后移除文件

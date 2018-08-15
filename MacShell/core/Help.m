@@ -12,7 +12,7 @@
 @implementation Help
 
 #pragma mark - 脚本调用
-+ (void)runTask:(NSArray *)arguments block:(ResultBlock)block{
++ (NSTask *)runTask:(NSArray *)arguments block:(void(^)(NSString *,NSTask *))block{
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @"/bin/sh";//文件路径
     task.arguments = arguments;
@@ -29,6 +29,8 @@
     };
     
     [task launch];
+    
+    return task;
 }
 
 
@@ -62,6 +64,24 @@
     NSLog(@"outputString=%@",outputString);
     NSLog(@"status=%d",privilegedTask.terminationStatus);// 终端状态
 }
+    
+#pragma mark - 文件选择
++ (void)openPanel:(NSString *)directory window:(NSWindow *)window block:(void(^)(NSString *))block{
+    NSOpenPanel* panel = [NSOpenPanel openPanel];
+    [panel setDirectory:directory];//保存文件路径
+    panel.canCreateDirectories = YES;//是否可以创建文件夹
+    panel.canChooseDirectories = YES;//是否可以选择文件夹
+    panel.canChooseFiles = NO;//是否可以选择文件
+    [panel setAllowsMultipleSelection:NO];//是否可以多选
+    //显示
+    [panel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
+        //是否点击open 按钮
+        if (result == NSModalResponseOK) {
+            NSString * path = [panel.URLs.firstObject path];
+            block(path);
+        }
+    }];
+}
 
 #pragma mark - 存储
 
@@ -85,7 +105,7 @@
 }
 
 //缓存选择文件路径
-+ (void)storageFilePath:(NSString *)path{
++ (void)storageFilePath:(NSString *)path key:(NSString *)key{
     path = [NSString stringWithFormat:@"file://%@",path];
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     NSURL * pathUrl = [NSURL URLWithString:path];
@@ -96,15 +116,15 @@
     
     [pathUrl stopAccessingSecurityScopedResource];
     if (!error) {
-        [userDefaults setObject:bookmarkData forKey:kChooseFilePath];
+        [userDefaults setObject:bookmarkData forKey:key];
         [userDefaults synchronize];
     }
     
 }
 //获取文件路径
-+ (NSString *)getFilePath{
++ (NSString *)getFilePath:(NSString *)key{
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    NSData * pathData = [userDefaults objectForKey:kChooseFilePath];
+    NSData * pathData = [userDefaults objectForKey:key];
     
     BOOL bookmarkDataIsStale;
     NSURL *allowedUrl = [NSURL URLByResolvingBookmarkData:pathData options:NSURLBookmarkResolutionWithSecurityScope relativeToURL:nil bookmarkDataIsStale:&bookmarkDataIsStale error:NULL];

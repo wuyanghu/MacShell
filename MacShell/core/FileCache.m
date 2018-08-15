@@ -18,7 +18,7 @@
     
     NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
     
-    if ( ![fileManager fileExistsAtPath:dirFile]) {
+    if (![fileManager fileExistsAtPath:dirFile]) {
         [fileManager createFileAtPath:dirFile contents:nil attributes:nil];
     }
     [data writeToFile:dirFile atomically:YES];

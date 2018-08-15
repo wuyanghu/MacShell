@@ -11,6 +11,7 @@
 commitParameter=$1 #获取参数
 project_path=$2 #工程路径
 sandbox_path=$3 #沙盒路径
+arccommand_path=$4 #arc命令所在目录
 
 cd $project_path
 
@@ -65,17 +66,18 @@ function commit ()
             git commit -m $commitParameter
             echo $commitParameter>$commitParamPath
         fi
+
     fi
 
     result=`readFileUrl`
     #做一个缓存:没有url则--create;有url则--update
     if [[ "$result" == "" ]]
     then
-        echo create >>$log_file_path
-        arc diff --encoding GBK --create --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
+    echo create >>$log_file_path
+    $arccommand_path""arc diff --encoding GBK --create --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
     else
-        echo update""${result##*/} >>$log_file_path
-        arc diff --encoding GBK --update ${result##*/} --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
+    echo update""${result##*/} >>$log_file_path
+    $arccommand_path""arc diff --encoding GBK --update ${result##*/} --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
     fi
 }
 

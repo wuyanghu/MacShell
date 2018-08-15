@@ -13,6 +13,7 @@
 #import "CheckViewController.h"
 
 @interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
+@property (weak) IBOutlet NSButtonCell *arcCommandDirectoryButton;//arc工程所在目录
 @property (weak) IBOutlet NSButton *chooseDirectoryButton;//工程目录
 @property (weak) IBOutlet NSStackView *stackView;
 @property (unsafe_unretained) IBOutlet NSTextView *textView; //信息录入框
@@ -23,7 +24,7 @@
 
 @property (nonatomic,strong) NSMutableDictionary * auditPersonDictionary;
 @property (nonatomic,copy) NSString * chooseFilePath;//选择路径
-
+@property (nonatomic,copy) NSString * arcCommandPath;
 
 @end
 
@@ -32,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.textView.delegate = self;
+    [self.arcCommandDirectoryButton setTitle:self.arcCommandPath?self.arcCommandPath:@"请选择arc所在目录"];
     [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择目录"];
     // Do any additional setup after loading the view
     NSDictionary * auditInfoDict = [Help getAuditInfo];
@@ -44,12 +46,6 @@
             [self.cacheLabelDict setObject:label forKey:key1];
         }
     }];
-    //1
-    //2
-    //3
-    //4
-    //5
-    //6 追加
 }
 
 
@@ -80,8 +76,15 @@
     NSButton * button = (NSButton *)sender;
     button.enabled = NO;
     
+    if (!self.arcCommandPath){
+        button.enabled = YES;
+        [self showAlertView:@"请选择arc命令目录!" window:nil];
+        return;
+    }
+    
     if (!self.chooseFilePath) {
-        [self showAlertView:@"请选择工程目录!"];
+        button.enabled = YES;
+        [self showAlertView:@"请选择工程目录!" window:nil];
         return;
     }
     
@@ -90,9 +93,8 @@
     
     [self.auditPersonDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         NSString * getKey = (NSString *)key;
-        if ([obj integerValue] == 0) {
+        if ([obj integerValue] == 1) {
             chooseAuditCount++;
-        }else{
             if ([auditPersonStr isEqualToString:@""]) {
                 auditPersonStr = getKey;
             }else{
@@ -101,33 +103,55 @@
         }
     }];
     
-    if (chooseAuditCount == self.auditPersonDictionary.allKeys.count) {
-        [self showAlertView:@"请选择审核人员!"];
+    if (chooseAuditCount < 3) {
+        button.enabled = YES;
+        [self showAlertView:@"审核人员至少3个!" window:nil];
         return;
     }
     
     NSString * commitInfoStr = self.textView.string;//提交信息
-    NSString * projectPathStr = [self.chooseFilePath substringFromIndex:7];//工程路径
     
+    if ([commitInfoStr isEqualToString:@""]) {
+        button.enabled = YES;
+        [self showAlertView:@"请输入commit信息" window:nil];
+        return;
+    }
+    
+    NSString * projectPathStr = [self.chooseFilePath substringFromIndex:7];//工程路径
+    NSString * arcCommandPathStr = [self.arcCommandPath substringFromIndex:7];//arc命令路径
     [FileCache writeFile:@"settingInfo.txt" content:[NSString stringWithFormat:@"摘要:%@\n测试计划:na\n评审者:%@",commitInfoStr,auditPersonStr]];
     
-    NSArray * array = @[@"startAuditScript.sh",commitInfoStr,projectPathStr,[FileCache getDoucumentPath]];
+    NSArray * array = @[@"startAuditScript.sh",commitInfoStr,projectPathStr,[FileCache getDoucumentPath],arcCommandPathStr];
     self.progressIndicatorView.hidden = NO;
     [self.progressIndicatorView startAnimation:nil];
-    [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
+    
+    NSTask * task = [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
         dispatch_async(dispatch_get_main_queue(), ^{
             button.enabled = YES;
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
         });
         [self hideProgressView];
         
         NSString * outputTxt = [FileCache readFile:@"output.txt"];
         NSString * extractUrl = [self extractUrl:outputTxt];
         if (extractUrl) {
-            [self showAlertView:[NSString stringWithFormat:@"%@ 已生成并复制到粘贴板",extractUrl]];
+            [self showAlertView:[NSString stringWithFormat:@"%@ 已生成并复制到粘贴板",extractUrl] window:nil];
         }else{
-            [self showAlertView:outputTxt!=nil?outputTxt:resultStr];
+            NSString * message = @"";
+            if (outputTxt){
+                message = outputTxt;
+            }else{
+                if(resultStr){
+                    message = resultStr;
+                }
+            }
+            if (message) {
+                [self showAlertView:message window:nil];
+            }
+            
         }
     }];
+    [self performSelector:@selector(cancelTask:) withObject:task afterDelay:60.0f];
 
 }
 
@@ -139,36 +163,34 @@
     NSArray * array = @[@"finishAuditScript.sh",projectPathStr,[FileCache getDoucumentPath]];
     self.progressIndicatorView.hidden = NO;
     [self.progressIndicatorView startAnimation:nil];
-    [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
+    NSTask * task = [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
         dispatch_async(dispatch_get_main_queue(), ^{
             button.enabled = YES;
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
         });
         [self hideProgressView];
-        
-        [self showAlertView:resultStr];
-    }];
-}
-
-- (IBAction)chooseDirectoryAction:(id)sender {
-    NSOpenPanel* panel = [NSOpenPanel openPanel];
-    [panel setDirectory:self.chooseFilePath];//保存文件路径
-    panel.canCreateDirectories = YES;//是否可以创建文件夹
-    panel.canChooseDirectories = YES;//是否可以选择文件夹
-    panel.canChooseFiles = NO;//是否可以选择文件
-    [panel setAllowsMultipleSelection:NO];//是否可以多选
-    //显示
-    [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
-        //是否点击open 按钮
-        if (result == NSModalResponseOK) {
-            //NSURL *pathUrl = [panel URL];
-            NSString * chooseFilePath = [panel.URLs.firstObject path];
-            [self.chooseDirectoryButton setTitle:chooseFilePath];
-            
-            [FileCache clearFileCache:@[@"output.txt",@"gitdiff.txt",@"commitParam.txt"]];
-            [Help storageFilePath:chooseFilePath];
+        if (resultStr) {
+            [self showAlertView:resultStr window:nil];
         }
     }];
+    [self performSelector:@selector(cancelTask:) withObject:task afterDelay:60.0f];
+}
+
+- (IBAction)arcCommandDirectoryAction:(id)sender {
+    [Help openPanel:self.arcCommandPath window:self.view.window block:^(NSString * path) {
+        [self.arcCommandDirectoryButton setTitle:path];
+        [Help storageFilePath:path key:kArcCommandPath];
+    }];
+}
     
+    
+- (IBAction)chooseDirectoryAction:(id)sender {
+    [Help openPanel:self.chooseFilePath window:self.view.window block:^(NSString * path) {
+        [self.chooseDirectoryButton setTitle:path];
+    
+        [FileCache clearFileCache:@[@"output.txt",@"gitdiff.txt",@"commitParam.txt"]];
+        [Help storageFilePath:path key:kChooseFilePath];
+    }];
 }
 
 - (IBAction)auditListAction:(id)sender {
@@ -177,11 +199,11 @@
 
 #pragma mark - CheckVCDelegate
 
-- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle{
+- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle window:(NSWindow *)window{
     NSLog(@"%@-%ld",checkTitle,button.state);
     if (self.cacheLabelDict.allKeys.count==5 && button.state == 1) {
         button.state = 0;
-        [self showAlertView:@"审核人最多只能选择5个"];
+        [self showAlertView:@"审核人最多只能选择5个" window:window];
         return;
     }
    
@@ -211,6 +233,14 @@
 
 #pragma mark - private mothod
 
+- (void)cancelTask:(NSTask *)task{
+    NSLog(@"cancelTask");
+    if (task.isRunning) {
+        [self showAlertView:@"脚本运行超时" window:nil];
+        [task terminate];
+    }
+}
+
 - (void)hideProgressView{
     if ([NSThread isMainThread]) {
         [self.progressIndicatorView stopAnimation:nil];
@@ -223,26 +253,34 @@
     }
 }
 
-- (void)showAlertView:(NSString *)messageText{
+- (void)showAlertView:(NSString *)messageText window:(NSWindow *)window{
     if ([NSThread isMainThread]) {
+        if (!window) {
+            window = self.view.window;
+        }
         NSAlert *alert = [NSAlert new];
         [alert addButtonWithTitle:@"确定"];
         [alert setMessageText:messageText];
         [alert setAlertStyle:NSWarningAlertStyle];
-        [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
+        [alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
             if(returnCode == NSAlertFirstButtonReturn){
                 NSLog(@"确定");
             }
         }];
     }else{
+        __block NSWindow * window2 = window;
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (!window2) {
+                window2 = self.view.window;
+            }
             NSAlert *alert = [NSAlert new];
             [alert addButtonWithTitle:@"确定"];
             [alert setMessageText:messageText];
             [alert setAlertStyle:NSWarningAlertStyle];
-            [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
+            [alert beginSheetModalForWindow:window2 completionHandler:^(NSModalResponse returnCode) {
                 if(returnCode == NSAlertFirstButtonReturn){
                     NSLog(@"确定");
+                    window2 = nil;
                 }
             }];
         });
@@ -278,11 +316,17 @@
 }
 
 - (NSString *)chooseFilePath{
-    _chooseFilePath = [Help getFilePath];
+    _chooseFilePath = [Help getFilePath:kChooseFilePath];
     
     return _chooseFilePath;
 }
-
+    
+- (NSString *)arcCommandPath{
+    _arcCommandPath = [Help getFilePath:kArcCommandPath];
+    
+    return _arcCommandPath;
+}
+    
 - (NSMutableDictionary *)auditPersonDictionary{
     if (!_auditPersonDictionary) {
         NSDictionary * auditInfoDict = [Help getAuditInfo];

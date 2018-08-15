@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 @protocol CheckVCDelegate
-- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle;
+- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle window:(NSWindow *)window;
 @end
 
 @interface CheckViewController : ViewController

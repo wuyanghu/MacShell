@@ -10,7 +10,7 @@
 #import "CheckNSTableViewCell.h"
 #import "Help.h"
 
-@interface CheckViewController ()<NSTabViewDelegate,NSTableViewDataSource,CheckCellDelegate>
+@interface CheckViewController ()<NSTableViewDelegate,NSTableViewDataSource,CheckCellDelegate>
 @property (nonatomic,strong) NSArray<NSString *> * tableViewDataSourceArr;
 @property (nonatomic,strong) NSTableView * tableView;
 
@@ -30,13 +30,13 @@
 - (void)addView{
     if (!_tableView) {
        _tableView = [[NSTableView alloc] init];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        [_tableView registerNib:[[NSNib alloc] initWithNibNamed:@"CheckNSTableViewCell" bundle:nil] forIdentifier:[CheckNSTableViewCell cellReuseIdentifierInfo]];
+       _tableView.delegate = self;
+       _tableView.dataSource = self;
+       [_tableView registerNib:[[NSNib alloc] initWithNibNamed:@"CheckNSTableViewCell" bundle:nil] forIdentifier:[CheckNSTableViewCell cellReuseIdentifierInfo]];
 
-       NSTableColumn *column = [[NSTableColumn alloc] initWithIdentifier:@"field1"];
-       column.width=300;
-       [_tableView addTableColumn:column];
+        NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:@"field1"];
+        column.width = 300;
+        [_tableView addTableColumn:column];
 
         NSScrollView *tableContainerView = [[NSScrollView alloc] initWithFrame:self.view.frame];
         [tableContainerView setDocumentView:_tableView];
@@ -45,10 +45,10 @@
         //[_tableContainer setHasHorizontalScroller:YES];  //有水平滚动条
         tableContainerView.autohidesScrollers = YES;//自动隐藏滚动条（滚动的时候出现）
         
-         [self.view addSubview:tableContainerView];
+        [self.view addSubview:tableContainerView];
     }
 
-   [_tableView reloadData];
+    [_tableView reloadData];
 }
 
 #pragma mark - NSTableView
@@ -70,16 +70,17 @@
 }
 
 - (BOOL)tableView:(NSTableView*)tableView shouldSelectRow:(NSInteger)row{
-    NSTableRowView *myRowView = [self.tableView rowViewAtRow:row makeIfNecessary:NO];
-    [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
-    [myRowView setEmphasized:NO];
-    return YES;
+
+    NSTableRowView * myRowView = [self.tableView rowViewAtRow:row makeIfNecessary:NO];
+    [myRowView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+    [myRowView setEmphasized:NO];
+    return YES;
 }
 
 #pragma mark - CheckCellDelegate
 
 - (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle{
-    [self.delegate checkAction:button checkTitle:checkTitle];
+    [self.delegate checkAction:button checkTitle:checkTitle window:self.view.window];
 }
 
 #pragma mark - getter
