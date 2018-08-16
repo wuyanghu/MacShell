@@ -25,6 +25,7 @@
 		4B2D2F7E211BEEF100DFF886 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2F7C211BE85E00DFF886 /* FileCache.m */; };
 		4B2D2F81211C223400DFF886 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2F7F211C223400DFF886 /* STPrivilegedTask.m */; };
 		4B2D2FD6211E7A9900DFF886 /* CheckNSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */; };
+		4BC386CA212571A7001A8B2A /* MonitorFileChangeHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */; };
 		4BF89A5F2115F15C00693897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF89A5E2115F15C00693897 /* AppDelegate.m */; };
 		4BF89A622115F15C00693897 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF89A612115F15C00693897 /* ViewController.m */; };
 		4BF89A642115F15D00693897 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BF89A632115F15D00693897 /* Assets.xcassets */; };
@@ -82,6 +83,8 @@
 		4B2D2F80211C223400DFF886 /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		4B2D2FD4211E7A9900DFF886 /* CheckNSTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckNSTableViewCell.h; sourceTree = "<group>"; };
 		4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckNSTableViewCell.m; sourceTree = "<group>"; };
+		4BC386C8212571A7001A8B2A /* MonitorFileChangeHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorFileChangeHelp.h; sourceTree = "<group>"; };
+		4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorFileChangeHelp.m; sourceTree = "<group>"; };
 		4BF89A5A2115F15C00693897 /* MacShell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacShell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF89A5D2115F15C00693897 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4BF89A5E2115F15C00693897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 		4B2D2F72211B0B5400DFF886 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				4BC386C8212571A7001A8B2A /* MonitorFileChangeHelp.h */,
+				4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */,
 				4B2D2F80211C223400DFF886 /* STPrivilegedTask.h */,
 				4B2D2F7F211C223400DFF886 /* STPrivilegedTask.m */,
 				4B2D2F73211B0C0000DFF886 /* Help.h */,
@@ -406,6 +411,7 @@
 				4BF89A6A2115F15D00693897 /* main.m in Sources */,
 				4B031FA9212437E30079A14C /* AFURLSessionManager.m in Sources */,
 				4B2D2F81211C223400DFF886 /* STPrivilegedTask.m in Sources */,
+				4BC386CA212571A7001A8B2A /* MonitorFileChangeHelp.m in Sources */,
 				4B2D2F75211B0C0000DFF886 /* Help.m in Sources */,
 				4B2CEDE6211E8D63003F1DC5 /* CheckViewController.m in Sources */,
 				4B031FA8212437E30079A14C /* AFHTTPSessionManager.m in Sources */,

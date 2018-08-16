@@ -11,6 +11,7 @@
 #import "FileCache.h"
 #import <Foundation/Foundation.h>
 #import "CheckViewController.h"
+#import "MonitorFileChangeHelp.h"
 
 @interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
 @property (weak) IBOutlet NSButtonCell *arcCommandDirectoryButton;//arc工程所在目录
@@ -29,6 +30,11 @@
 @property (nonatomic,copy) NSString * chooseFilePath;//选择路径
 @property (nonatomic,copy) NSString * arcCommandPath;
 
+@property (nonatomic,strong) MonitorFileChangeHelp *fileMonitor;
+
+@property (weak) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (unsafe_unretained) IBOutlet NSTextView *logTextView;
+
 @end
 
 @implementation ViewController
@@ -36,7 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getAndSetArcLanguage];
-
+    
+    self.logTextView.editable = NO;
+    self.logTextView.string = @"log日志输出";
     NSString * commitInfo = (NSString *)[Help getUserDefaultObject:kCommitInfo];
     if (commitInfo && ![commitInfo isEqualToString:@""]) {
         self.textView.string = commitInfo;
@@ -144,10 +152,13 @@
     self.progressIndicatorView.hidden = NO;
     [self.progressIndicatorView startAnimation:nil];
     
+    [self listeningLogFile];
+    
     NSTask * task = [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
         dispatch_async(dispatch_get_main_queue(), ^{
             button.enabled = YES;
             [NSObject cancelPreviousPerformRequestsWithTarget:self];
+            [self cancelListeningLogFile];
         });
         [self hideProgressView];
         
@@ -230,6 +241,17 @@
     [Help storageUserDefaultObject:@"English" key:kArcLanguagePath];
 }
 
+- (IBAction)showLogAction:(id)sender {
+    NSButton * button = (NSButton *)sender;
+    NSLog(@"%ld",button.state);
+    
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.2];
+    [self.bottomConstraint.animator setConstant:button.state == 1?180:20];
+    [NSAnimationContext endGrouping];
+    
+}
+
 
 #pragma mark - CheckVCDelegate
 
@@ -267,6 +289,22 @@
 }
 
 #pragma mark - private mothod
+
+- (void)listeningLogFile{
+    [FileCache writeFile:@"log.txt" content:@""];
+    if (!_fileMonitor) {
+        _fileMonitor = [MonitorFileChangeHelp new];
+    }
+    NSString * path = [NSString stringWithFormat:@"%@/%@",[FileCache getDoucumentPath],@"log.txt"];
+    [_fileMonitor watcherForPath:path block:^(NSInteger type) {
+        NSString * logContent = [FileCache readFile:@"log.txt"];
+        self.logTextView.string = logContent;
+    }];
+}
+
+- (void)cancelListeningLogFile{
+    [_fileMonitor cancelListeningLogFile];
+}
 
 - (void)getAndSetArcLanguage{
     NSString * language = (NSString *)[Help getUserDefaultObject:kArcLanguagePath];
