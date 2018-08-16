@@ -8,6 +8,7 @@
 
 #import "Help.h"
 #import "STPrivilegedTask.h"
+#import "AFNetworking.h"
 
 @implementation Help
 
@@ -63,6 +64,30 @@
     
     NSLog(@"outputString=%@",outputString);
     NSLog(@"status=%d",privilegedTask.terminationStatus);// 终端状态
+}
+
+#pragma mark - json与字典转换
+
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
++ (NSString*)dictionaryToJson:(NSDictionary *)dic{
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
     
 #pragma mark - 文件选择
@@ -130,6 +155,60 @@
     NSURL *allowedUrl = [NSURL URLByResolvingBookmarkData:pathData options:NSURLBookmarkResolutionWithSecurityScope relativeToURL:nil bookmarkDataIsStale:&bookmarkDataIsStale error:NULL];
     [allowedUrl startAccessingSecurityScopedResource];
     return [allowedUrl absoluteString];
+}
+
++ (void)storageUserDefaultObject:(NSObject *)obj key:(NSString *)key{
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    if (obj && key) {
+        [userDefaults setObject:obj forKey:key];
+        [userDefaults synchronize];
+    }
+}
+
++ (NSObject *)getUserDefaultObject:(NSString *)key{
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    if (key) {
+        NSObject * object = [userDefaults objectForKey:key];
+        return object;
+    }
+    return nil;
+}
+
+#pragma mark - arc语言
++ (void)getArcLanguage:(void(^)(NSString *))block{
+    [Help runTask:@[@"gettoken.sh"] block:^(NSString * outputStr, NSTask * task) {
+        NSArray *array = [outputStr componentsSeparatedByString:@"\n"];
+        if (array.count>1) {
+            NSString * jsonStr = array[1];
+            NSDictionary * dict = [Help dictionaryWithJsonString:jsonStr];
+            NSString * token = dict[@"hosts"][@"http://112.13.170.228:8089/api/"][@"token"];
+            NSLog(@"token=%@",token);
+            if (!token) {
+                return ;
+            }
+            NSDictionary * params = @{@"revision_id":@"",@"edit":@"create",@"fields":@[],@"__conduit__":@{@"token":token}};
+            NSString * paramStr = [Help dictionaryToJson:params];
+            NSDictionary * paramDict = @{@"params":paramStr,@"output":@"json",@"__conduit__":@"1"};
+            
+            AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]init];
+            
+            [manager GET:@"http://112.13.170.228:8089/api/differential.getcommitmessage" parameters:paramDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSDictionary * responseDict = (NSDictionary *)responseObject;
+                if (responseDict) {
+                    NSString * result = responseDict[@"result"];
+                    if ([result containsString:@"摘要:"]) {
+                        block(NSLocalizedString(@"chinese", nil));
+                    }else if ([result containsString:@"Summary:"]){
+                        block(@"English");
+                    }
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"请求失败--%@",error);
+            }];
+            
+        }
+    }];
+    
 }
 
 @end

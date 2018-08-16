@@ -846,7 +846,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="euh-vM-FLV">
-                                <rect key="frame" x="16" y="358" width="608" height="41"/>
+                                <rect key="frame" x="16" y="358" width="478" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AKo-Kj-N9r"/>
                                 </constraints>
@@ -858,6 +858,34 @@
                                     </connections>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-ix-Jfc">
+                                <rect key="frame" x="497" y="371" width="49" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="EYB-F0-8eI"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="Rzm-5z-f9G"/>
+                                </constraints>
+                                <buttonCell key="cell" type="radio" title="中文" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YVW-kZ-SEb">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="chineseAction:" target="XfG-lQ-9wD" id="BY2-dQ-sRK"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q0E-cl-lT8">
+                                <rect key="frame" x="553" y="371" width="67" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="dxb-7q-Wkl"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="fPe-of-yT6"/>
+                                </constraints>
+                                <buttonCell key="cell" type="radio" title="English" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="dFX-AC-7Z5">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="englistAction:" target="XfG-lQ-9wD" id="yn8-XU-5S9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="NFl-Wb-6Vc" secondAttribute="bottom" constant="20" id="0bG-13-Xnb"/>
@@ -866,17 +894,21 @@
                             <constraint firstItem="ZYO-DG-LNg" firstAttribute="top" secondItem="AEp-lJ-NZc" secondAttribute="top" id="9Ck-6J-rWX"/>
                             <constraint firstItem="gtp-9c-3AB" firstAttribute="top" secondItem="AfL-S1-sH8" secondAttribute="bottom" constant="30" id="Dmp-AC-q2i"/>
                             <constraint firstItem="Isz-5h-Plu" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="FBn-jz-bMl"/>
-                            <constraint firstItem="euh-vM-FLV" firstAttribute="trailing" secondItem="Fpa-jX-PhR" secondAttribute="trailing" id="IC5-5G-JbN"/>
                             <constraint firstItem="AfL-S1-sH8" firstAttribute="top" secondItem="rlB-1N-U9l" secondAttribute="bottom" constant="30" id="Kpv-qd-o4q"/>
                             <constraint firstItem="NFl-Wb-6Vc" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" constant="100" id="SWa-L8-dZm"/>
                             <constraint firstItem="AfL-S1-sH8" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="T9R-XG-EJf"/>
+                            <constraint firstItem="q0E-cl-lT8" firstAttribute="trailing" secondItem="Fpa-jX-PhR" secondAttribute="trailing" id="TtQ-6y-UCH"/>
                             <constraint firstItem="ZYO-DG-LNg" firstAttribute="leading" secondItem="AEp-lJ-NZc" secondAttribute="leading" constant="5" id="Tw0-DU-ErR"/>
+                            <constraint firstItem="q0E-cl-lT8" firstAttribute="leading" secondItem="oBy-ix-Jfc" secondAttribute="trailing" constant="10" id="UYA-JY-psk"/>
                             <constraint firstItem="Fpa-jX-PhR" firstAttribute="trailing" secondItem="AEp-lJ-NZc" secondAttribute="trailing" id="Xvv-5D-d9S"/>
+                            <constraint firstItem="oBy-ix-Jfc" firstAttribute="centerY" secondItem="q0E-cl-lT8" secondAttribute="centerY" id="YwE-Hi-2ij"/>
                             <constraint firstItem="Fpa-jX-PhR" firstAttribute="top" secondItem="euh-vM-FLV" secondAttribute="bottom" constant="30" id="ebw-X6-dbY"/>
                             <constraint firstItem="rlB-1N-U9l" firstAttribute="trailing" secondItem="AEp-lJ-NZc" secondAttribute="trailing" id="f1m-Yu-Qxi"/>
                             <constraint firstItem="rlB-1N-U9l" firstAttribute="top" secondItem="Fpa-jX-PhR" secondAttribute="bottom" constant="30" id="fmg-lg-PgG"/>
+                            <constraint firstItem="oBy-ix-Jfc" firstAttribute="centerY" secondItem="euh-vM-FLV" secondAttribute="centerY" id="l38-gk-tUe"/>
                             <constraint firstItem="rlB-1N-U9l" firstAttribute="leading" secondItem="AEp-lJ-NZc" secondAttribute="leading" id="meB-t2-2g8"/>
                             <constraint firstItem="euh-vM-FLV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="nHu-gC-I6l"/>
+                            <constraint firstItem="euh-vM-FLV" firstAttribute="trailing" secondItem="Fpa-jX-PhR" secondAttribute="trailing" constant="-130" id="nsl-sE-QEJ"/>
                             <constraint firstItem="euh-vM-FLV" firstAttribute="leading" secondItem="Fpa-jX-PhR" secondAttribute="leading" id="rKI-ka-9Iu"/>
                             <constraint firstItem="Fpa-jX-PhR" firstAttribute="leading" secondItem="AEp-lJ-NZc" secondAttribute="leading" id="tv6-Ni-D7G"/>
                             <constraint firstAttribute="trailing" secondItem="AfL-S1-sH8" secondAttribute="trailing" constant="20" id="vKd-lO-PEG"/>
@@ -885,7 +917,9 @@
                     </view>
                     <connections>
                         <outlet property="arcCommandDirectoryButton" destination="6TW-kn-EHN" id="HmU-Im-r8T"/>
+                        <outlet property="chineseButton" destination="oBy-ix-Jfc" id="6yf-Z6-ctb"/>
                         <outlet property="chooseDirectoryButton" destination="Fpa-jX-PhR" id="lYv-kM-Yzc"/>
+                        <outlet property="englishButton" destination="q0E-cl-lT8" id="cQk-Bh-NHo"/>
                         <outlet property="placeLabel" destination="ZYO-DG-LNg" id="oOE-76-iqB"/>
                         <outlet property="progressIndicatorView" destination="Isz-5h-Plu" id="AR2-kL-PdW"/>
                         <outlet property="stackView" destination="izc-Br-IWi" id="iBL-HW-tat"/>

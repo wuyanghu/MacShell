@@ -18,6 +18,10 @@
     
     NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
     
+    if (![fileManager fileExistsAtPath:dirDoc]) {
+        [fileManager createDirectoryAtPath:dirDoc withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
     if (![fileManager fileExistsAtPath:dirFile]) {
         [fileManager createFileAtPath:dirFile contents:nil attributes:nil];
     }
@@ -38,7 +42,8 @@
 //获取文件沙盒路径
 + (NSString *)getDoucumentPath{
     NSString *dirDoc = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    return dirDoc;
+    NSString *dirFile = [dirDoc stringByAppendingPathComponent:@"MacShell"];
+    return dirFile;
 }
 
 //清除缓存

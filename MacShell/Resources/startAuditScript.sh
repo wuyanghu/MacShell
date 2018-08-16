@@ -59,8 +59,8 @@ function commit ()
 
         commitParamPath=$commitparam_file_path
         if [ -f $commitParamPath ];then
-            echo amend >>$log_file_path
             git commit --amend -m $commitParameter
+            echo amend >>$log_file_path
         else
             echo commit >>$log_file_path
             git commit -m $commitParameter
@@ -73,11 +73,11 @@ function commit ()
     #做一个缓存:没有url则--create;有url则--update
     if [[ "$result" == "" ]]
     then
-    echo create >>$log_file_path
     $arccommand_path""arc diff --encoding GBK --create --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
+    echo create >>$log_file_path
     else
-    echo update""${result##*/} >>$log_file_path
     $arccommand_path""arc diff --encoding GBK --update ${result##*/} --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
+    echo update""${result##*/} >>$log_file_path
     fi
 }
 

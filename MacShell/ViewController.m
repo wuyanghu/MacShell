@@ -9,11 +9,14 @@
 #import "ViewController.h"
 #import "Help.h"
 #import "FileCache.h"
-
+#import <Foundation/Foundation.h>
 #import "CheckViewController.h"
 
 @interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
 @property (weak) IBOutlet NSButtonCell *arcCommandDirectoryButton;//arc工程所在目录
+@property (weak) IBOutlet NSButton *chineseButton;
+@property (weak) IBOutlet NSButton *englishButton;
+
 @property (weak) IBOutlet NSButton *chooseDirectoryButton;//工程目录
 @property (weak) IBOutlet NSStackView *stackView;
 @property (unsafe_unretained) IBOutlet NSTextView *textView; //信息录入框
@@ -32,9 +35,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getAndSetArcLanguage];
+
+    NSString * commitInfo = (NSString *)[Help getUserDefaultObject:kCommitInfo];
+    if (commitInfo && ![commitInfo isEqualToString:@""]) {
+        self.textView.string = commitInfo;
+        self.placeLabel.hidden = YES;
+    }
     self.textView.delegate = self;
     [self.arcCommandDirectoryButton setTitle:self.arcCommandPath?self.arcCommandPath:@"请选择arc所在目录"];
-    [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择目录"];
+    [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择工程目录"];
     // Do any additional setup after loading the view
     NSDictionary * auditInfoDict = [Help getAuditInfo];
     [auditInfoDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -46,11 +56,7 @@
             [self.cacheLabelDict setObject:label forKey:key1];
         }
     }];
-    //1
-    //2
-    //3
 }
-
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
@@ -112,7 +118,11 @@
         return;
     }
     
-    NSString * commitInfoStr = self.textView.string;//提交信息
+    NSString * commitInfoStr = @"";
+    NSArray * commitInfoArr = [self.textView.string componentsSeparatedByString:@"\n"];//提交信息
+    for (NSString * info in commitInfoArr) {
+        commitInfoStr = [NSString stringWithFormat:@"%@%@",commitInfoStr,info];
+    }
     
     if ([commitInfoStr isEqualToString:@""]) {
         button.enabled = YES;
@@ -122,7 +132,13 @@
     
     NSString * projectPathStr = [self.chooseFilePath substringFromIndex:7];//工程路径
     NSString * arcCommandPathStr = [self.arcCommandPath substringFromIndex:7];//arc命令路径
-    [FileCache writeFile:@"settingInfo.txt" content:[NSString stringWithFormat:@"摘要:%@\n测试计划:na\n评审者:%@",commitInfoStr,auditPersonStr]];
+    
+    NSString * language = (NSString *)[Help getUserDefaultObject:kArcLanguagePath];
+    if ([language isEqualToString:NSLocalizedString(@"chinese", nil)]) {
+        [FileCache writeFile:@"settingInfo.txt" content:[NSString stringWithFormat:@"摘要:%@\n测试计划:na\n评审者:%@",commitInfoStr,auditPersonStr]];
+    }else{
+        [FileCache writeFile:@"settingInfo.txt" content:[NSString stringWithFormat:@"Summary:%@\nTest Plan:na\nReviewers:%@",commitInfoStr,auditPersonStr]];
+    }
     
     NSArray * array = @[@"startAuditScript.sh",commitInfoStr,projectPathStr,[FileCache getDoucumentPath],arcCommandPathStr];
     self.progressIndicatorView.hidden = NO;
@@ -148,10 +164,9 @@
                     message = resultStr;
                 }
             }
-            if (message) {
+            if (![message isEqualToString:@""]) {
                 [self showAlertView:message window:nil];
             }
-            
         }
     }];
     [self performSelector:@selector(cancelTask:) withObject:task afterDelay:60.0f];
@@ -159,6 +174,7 @@
 }
 
 - (IBAction)finishAuditAction:(id)sender {
+    
     NSButton * button  = (NSButton *)sender;
     button.enabled = NO;
     
@@ -170,6 +186,10 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             button.enabled = YES;
             [NSObject cancelPreviousPerformRequestsWithTarget:self];
+            if (resultStr && ![resultStr isEqualToString:@""]) {
+                self.textView.string = @"";
+                self.placeLabel.hidden = NO;
+            }
         });
         [self hideProgressView];
         if (resultStr) {
@@ -199,6 +219,17 @@
 - (IBAction)auditListAction:(id)sender {
     [self showAlertCheckVC];
 }
+
+- (IBAction)chineseAction:(id)sender {
+    self.englishButton.state = !self.chineseButton.state;
+    [Help storageUserDefaultObject:NSLocalizedString(@"chinese", nil) key:kArcLanguagePath];
+}
+
+- (IBAction)englistAction:(id)sender {
+    self.chineseButton.state = !self.englishButton.state;
+    [Help storageUserDefaultObject:@"English" key:kArcLanguagePath];
+}
+
 
 #pragma mark - CheckVCDelegate
 
@@ -232,9 +263,37 @@
     }else{
         self.placeLabel.hidden = YES;
     }
+    [Help storageUserDefaultObject:textView.string key:kCommitInfo];
 }
 
 #pragma mark - private mothod
+
+- (void)getAndSetArcLanguage{
+    NSString * language = (NSString *)[Help getUserDefaultObject:kArcLanguagePath];
+    if (!language) {
+        [Help getArcLanguage:^(NSString * languageParm) {
+            [Help storageUserDefaultObject:languageParm key:kArcLanguagePath];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([languageParm isEqualToString:NSLocalizedString(@"chinese", nil)]) {
+                    self.chineseButton.state = 1;
+                    self.englishButton.state = 0;
+                }else{
+                    self.chineseButton.state = 0;
+                    self.englishButton.state = 1;
+                }
+            });
+        }];
+    }else{
+        if ([language isEqualToString:NSLocalizedString(@"chinese", nil)]) {
+            self.chineseButton.state = 1;
+            self.englishButton.state = 0;
+        }else{
+            self.chineseButton.state = 0;
+            self.englishButton.state = 1;
+        }
+    }
+}
 
 - (void)cancelTask:(NSTask *)task{
     NSLog(@"cancelTask");
