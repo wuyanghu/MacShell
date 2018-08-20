@@ -200,6 +200,7 @@
             if (resultStr && ![resultStr isEqualToString:@""]) {
                 self.textView.string = @"";
                 self.placeLabel.hidden = NO;
+                [Help storageUserDefaultObject:@"" key:kCommitInfo];
             }
         });
         [self hideProgressView];
