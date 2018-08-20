@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import "CheckViewController.h"
 #import "MonitorFileChangeHelp.h"
+#import "test2.h"
 
 @interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
 @property (weak) IBOutlet NSButtonCell *arcCommandDirectoryButton;//arc工程所在目录
@@ -44,6 +45,8 @@
     //1
     //分支2
     //test1 amend
+    
+    //11
     [self getAndSetArcLanguage];
     
     self.logTextView.editable = NO;

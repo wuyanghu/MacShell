@@ -27,6 +27,7 @@
 		4B2D2FD6211E7A9900DFF886 /* CheckNSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */; };
 		4BC386CA212571A7001A8B2A /* MonitorFileChangeHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */; };
 		4BC95384212AB73B007A1C6F /* test1.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC95383212AB73B007A1C6F /* test1.m */; };
+		4BC95387212AB816007A1C6F /* test2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC95386212AB816007A1C6F /* test2.m */; };
 		4BF89A5F2115F15C00693897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF89A5E2115F15C00693897 /* AppDelegate.m */; };
 		4BF89A622115F15C00693897 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF89A612115F15C00693897 /* ViewController.m */; };
 		4BF89A642115F15D00693897 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BF89A632115F15D00693897 /* Assets.xcassets */; };
@@ -88,6 +89,8 @@
 		4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorFileChangeHelp.m; sourceTree = "<group>"; };
 		4BC95382212AB73B007A1C6F /* test1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test1.h; sourceTree = "<group>"; };
 		4BC95383212AB73B007A1C6F /* test1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test1.m; sourceTree = "<group>"; };
+		4BC95385212AB816007A1C6F /* test2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test2.h; sourceTree = "<group>"; };
+		4BC95386212AB816007A1C6F /* test2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test2.m; sourceTree = "<group>"; };
 		4BF89A5A2115F15C00693897 /* MacShell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacShell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF89A5D2115F15C00693897 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4BF89A5E2115F15C00693897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				4B2D2F74211B0C0000DFF886 /* Help.m */,
 				4B2D2F7B211BE85E00DFF886 /* FileCache.h */,
 				4B2D2F7C211BE85E00DFF886 /* FileCache.m */,
+				4BC95385212AB816007A1C6F /* test2.h */,
+				4BC95386212AB816007A1C6F /* test2.m */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				4BF89A622115F15C00693897 /* ViewController.m in Sources */,
 				4B031FAA212437E30079A14C /* AFURLRequestSerialization.m in Sources */,
 				4BF89A6A2115F15D00693897 /* main.m in Sources */,
+				4BC95387212AB816007A1C6F /* test2.m in Sources */,
 				4B031FA9212437E30079A14C /* AFURLSessionManager.m in Sources */,
 				4B2D2F81211C223400DFF886 /* STPrivilegedTask.m in Sources */,
 				4BC386CA212571A7001A8B2A /* MonitorFileChangeHelp.m in Sources */,
