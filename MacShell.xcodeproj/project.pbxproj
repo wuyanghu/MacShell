@@ -26,6 +26,7 @@
 		4B2D2F81211C223400DFF886 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2F7F211C223400DFF886 /* STPrivilegedTask.m */; };
 		4B2D2FD6211E7A9900DFF886 /* CheckNSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */; };
 		4BC386CA212571A7001A8B2A /* MonitorFileChangeHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */; };
+		4BC95384212AB73B007A1C6F /* test1.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC95383212AB73B007A1C6F /* test1.m */; };
 		4BF89A5F2115F15C00693897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF89A5E2115F15C00693897 /* AppDelegate.m */; };
 		4BF89A622115F15C00693897 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF89A612115F15C00693897 /* ViewController.m */; };
 		4BF89A642115F15D00693897 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BF89A632115F15D00693897 /* Assets.xcassets */; };
@@ -85,6 +86,8 @@
 		4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckNSTableViewCell.m; sourceTree = "<group>"; };
 		4BC386C8212571A7001A8B2A /* MonitorFileChangeHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorFileChangeHelp.h; sourceTree = "<group>"; };
 		4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorFileChangeHelp.m; sourceTree = "<group>"; };
+		4BC95382212AB73B007A1C6F /* test1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test1.h; sourceTree = "<group>"; };
+		4BC95383212AB73B007A1C6F /* test1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test1.m; sourceTree = "<group>"; };
 		4BF89A5A2115F15C00693897 /* MacShell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacShell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF89A5D2115F15C00693897 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4BF89A5E2115F15C00693897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				4BF89A682115F15D00693897 /* Info.plist */,
 				4BF89A692115F15D00693897 /* main.m */,
 				4BF89A6B2115F15D00693897 /* MacShell.entitlements */,
+				4BC95382212AB73B007A1C6F /* test1.h */,
+				4BC95383212AB73B007A1C6F /* test1.m */,
 			);
 			path = MacShell;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 				4B031FAC212437E30079A14C /* AFSecurityPolicy.m in Sources */,
 				4B2D2FD6211E7A9900DFF886 /* CheckNSTableViewCell.m in Sources */,
 				4B031FAB212437E30079A14C /* AFNetworkReachabilityManager.m in Sources */,
+				4BC95384212AB73B007A1C6F /* test1.m in Sources */,
 				4B031FA7212437E30079A14C /* AFURLResponseSerialization.m in Sources */,
 				4BF89A622115F15C00693897 /* ViewController.m in Sources */,
 				4B031FAA212437E30079A14C /* AFURLRequestSerialization.m in Sources */,
