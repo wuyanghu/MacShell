@@ -42,7 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //追加11
+    //追加112
     [self getAndSetArcLanguage];
     
     self.logTextView.editable = NO;
