@@ -7,7 +7,6 @@
 //
 
 #import "Help.h"
-#import "STPrivilegedTask.h"
 #import "AFNetworking.h"
 
 @implementation Help
@@ -32,38 +31,6 @@
     [task launch];
     
     return task;
-}
-
-
-+ (void)runRootTask:(NSArray *)arguments{
-    STPrivilegedTask *privilegedTask = [[STPrivilegedTask alloc] init];
-    
-    NSString *launchPath = @"/bin/sh";//文件路径;
-    [privilegedTask setLaunchPath:launchPath];
-    [privilegedTask setArguments:arguments];
-    [privilegedTask setCurrentDirectoryPath:[[NSBundle mainBundle] resourcePath]];
-    
-    //set it off
-    OSStatus err = [privilegedTask launch];
-    if (err != errAuthorizationSuccess) {
-        if (err == errAuthorizationCanceled) {
-            NSLog(@"User cancelled");
-            return;
-        }  else {
-            NSLog(@"Something went wrong: %d", (int)err);
-            // For error codes, see http://www.opensource.apple.com/source/libsecurity_authorization/libsecurity_authorization-36329/lib/Authorization.h
-        }
-    }
-    
-    [privilegedTask waitUntilExit];
-    
-    // Success!  Now, start monitoring output file handle for data
-    NSFileHandle *readHandle = [privilegedTask outputFileHandle];
-    NSData *outputData = [readHandle readDataToEndOfFile];
-    NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"outputString=%@",outputString);
-    NSLog(@"status=%d",privilegedTask.terminationStatus);// 终端状态
 }
 
 #pragma mark - json与字典转换

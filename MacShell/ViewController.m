@@ -12,7 +12,6 @@
 #import <Foundation/Foundation.h>
 #import "CheckViewController.h"
 #import "MonitorFileChangeHelp.h"
-#import "test2.h"
 
 @interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
 @property (weak) IBOutlet NSButtonCell *arcCommandDirectoryButton;//arc工程所在目录
@@ -42,7 +41,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //追加112
     [self getAndSetArcLanguage];
     
     self.logTextView.editable = NO;
@@ -127,14 +125,9 @@
         [self showAlertView:@"审核人员至少3个!" window:nil];
         return;
     }
-    
-    NSString * commitInfoStr = @"";
-    NSArray * commitInfoArr = [self.textView.string componentsSeparatedByString:@"\n"];//提交信息
-    for (NSString * info in commitInfoArr) {
-        commitInfoStr = [NSString stringWithFormat:@"%@%@",commitInfoStr,info];
-    }
-    
-    if ([commitInfoStr isEqualToString:@""]) {
+
+    NSString * commitInfoStr = [self removeSpaceAndNewline:self.textView.string];
+    if ([commitInfoStr isEqualToString:@""] || !commitInfoStr) {
         button.enabled = YES;
         [self showAlertView:@"请输入commit信息" window:nil];
         return;
@@ -225,7 +218,7 @@
     [Help openPanel:self.chooseFilePath window:self.view.window block:^(NSString * path) {
         [self.chooseDirectoryButton setTitle:path];
     
-        [FileCache clearFileCache:@[@"output.txt",@"gitdiff.txt",@"commitParam.txt"]];
+        [FileCache clearFileCache:@[@"output.txt",@"gitdiff.txt"]];
         [Help storageFilePath:path key:kChooseFilePath];
     }];
 }
@@ -292,6 +285,14 @@
 }
 
 #pragma mark - private mothod
+//移除字符串中的换行和空格
+- (NSString *)removeSpaceAndNewline:(NSString *)str
+{
+    NSString *temp = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    temp = [temp stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    temp = [temp stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    return temp;
+}
 
 - (void)listeningLogFile{
     [FileCache writeFile:@"log.txt" content:@""];
@@ -364,7 +365,7 @@
         NSAlert *alert = [NSAlert new];
         [alert addButtonWithTitle:@"确定"];
         [alert setMessageText:messageText];
-        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert setAlertStyle:NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
             if(returnCode == NSAlertFirstButtonReturn){
                 NSLog(@"确定");
@@ -379,7 +380,7 @@
             NSAlert *alert = [NSAlert new];
             [alert addButtonWithTitle:@"确定"];
             [alert setMessageText:messageText];
-            [alert setAlertStyle:NSWarningAlertStyle];
+            [alert setAlertStyle:NSInformationalAlertStyle];
             [alert beginSheetModalForWindow:window2 completionHandler:^(NSModalResponse returnCode) {
                 if(returnCode == NSAlertFirstButtonReturn){
                     NSLog(@"确定");

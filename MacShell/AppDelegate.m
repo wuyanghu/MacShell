@@ -18,7 +18,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     self.window = [NSApplication sharedApplication].keyWindow;
-    [[self.window standardWindowButton:NSWindowZoomButton] setEnabled:NO];
+    [[self.window standardWindowButton:NSWindowZoomButton] setHidden:YES];
+    
 }
 
 
