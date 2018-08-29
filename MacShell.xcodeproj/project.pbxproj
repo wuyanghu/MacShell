@@ -15,6 +15,7 @@
 		4B031FAB212437E30079A14C /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B031FA3212437E30079A14C /* AFNetworkReachabilityManager.m */; };
 		4B031FAC212437E30079A14C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B031FA4212437E30079A14C /* AFSecurityPolicy.m */; };
 		4B031FCC2124448C0079A14C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B031FCB2124448C0079A14C /* Localizable.strings */; };
+		4B09A7742136C385009EE2E2 /* traveDir.py in Resources */ = {isa = PBXBuildFile; fileRef = 4B09A7732136C385009EE2E2 /* traveDir.py */; };
 		4B2CEDD9211E840E003F1DC5 /* CheckNSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B2CEDD8211E840E003F1DC5 /* CheckNSTableViewCell.xib */; };
 		4B2CEDE6211E8D63003F1DC5 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2CEDE4211E8D63003F1DC5 /* CheckViewController.m */; };
 		4B2CEDE7211E8D63003F1DC5 /* CheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B2CEDE5211E8D63003F1DC5 /* CheckViewController.xib */; };
@@ -68,6 +69,7 @@
 		4B031FA5212437E30079A14C /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		4B031FA6212437E30079A14C /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		4B031FCB2124448C0079A14C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		4B09A7732136C385009EE2E2 /* traveDir.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = traveDir.py; sourceTree = "<group>"; };
 		4B2CEDD8211E840E003F1DC5 /* CheckNSTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckNSTableViewCell.xib; sourceTree = "<group>"; };
 		4B2CEDE3211E8D63003F1DC5 /* CheckViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
 		4B2CEDE4211E8D63003F1DC5 /* CheckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		4B2D2F76211BD3D200DFF886 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B09A7732136C385009EE2E2 /* traveDir.py */,
 				4B031F952124246E0079A14C /* gettoken.sh */,
 				4B2D2F78211BD3F400DFF886 /* startAuditScript.sh */,
 				4B2D2F77211BD3F400DFF886 /* finishAuditScript.sh */,
@@ -368,6 +371,7 @@
 				4BF89A642115F15D00693897 /* Assets.xcassets in Resources */,
 				4B031FCC2124448C0079A14C /* Localizable.strings in Resources */,
 				4B2D2F79211BD3F400DFF886 /* finishAuditScript.sh in Resources */,
+				4B09A7742136C385009EE2E2 /* traveDir.py in Resources */,
 				4B031F962124246F0079A14C /* gettoken.sh in Resources */,
 				4B2CEDD9211E840E003F1DC5 /* CheckNSTableViewCell.xib in Resources */,
 				4B2CEDE7211E8D63003F1DC5 /* CheckViewController.xib in Resources */,

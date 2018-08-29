@@ -23,11 +23,6 @@
 
 - (void)setCheckTitle:(NSString *)checkTitle state:(NSInteger)state{
     _checkTitle = checkTitle;
-    if ([checkTitle isEqualToString:@"chensong"] || [checkTitle isEqualToString:@"shezhiqiang"]) {
-        self.checkButton.enabled = NO;
-    }else{
-        self.checkButton.enabled = YES;
-    }
     self.checkButton.state = state;
     [self.checkButton setTitle:checkTitle];
 }

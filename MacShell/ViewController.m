@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getAndSetArcLanguage];
-    //1
+    
     self.logTextView.editable = NO;
     self.logTextView.string = @"log日志输出";
     NSString * commitInfo = (NSString *)[Help getUserDefaultObject:kCommitInfo];

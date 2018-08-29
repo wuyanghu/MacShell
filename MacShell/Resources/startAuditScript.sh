@@ -27,18 +27,11 @@ echo "">$log_file_path
 function readFileUrl ()
 {
     if [ -f $arcidffreuslt_file_path ];then
-        cat $arcidffreuslt_file_path | while read url
-        do
-            result=$(echo $url | grep "http://")
-            if [[ "$result" != "" ]]
-            then
-            echo ${url#*URI:} | pbcopy #分割字符并拷贝到剪切板
-            echo $url
-            break
-            fi
-
-        done
-
+        result=$(grep -o "http://.*" $arcidffreuslt_file_path)
+        if [ $? -eq 0 ];then
+        echo $result | pbcopy
+        echo $result
+        fi
     fi
 }
 #判断是否有推送

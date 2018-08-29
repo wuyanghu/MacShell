@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-#define kChensong @"chensong"
-#define kShezhiqiang @"shezhiqiang"
-
 #define kChooseFilePath @"chooseFilePath"//缓存选择文件的路径
 #define kArcCommandPath @"arcCommandPath"//arc文件命令所在目录
 #define kArcLanguagePath @"arcLanguagePath"//arc使用语言(中文or英文)
