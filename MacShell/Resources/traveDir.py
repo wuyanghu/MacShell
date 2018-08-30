@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#coding:utf-8
+# -*- coding: UTF-8 -*-
 
 import os
 import re
@@ -14,7 +14,7 @@ sys.setdefaultencoding('utf-8')
 result_chinese_dict = {}
 localizable_strings_dict = {}
 
-project_path = '/Users/ruantong/Desktop/test2/test'
+project_path = '/Users/ruantong/Desktop/migu/githubMacShell/MacShell'
 chinese_str_path = '/Users/ruantong/Desktop/chinese_str_json.txt'
 localizable_str_path = '/Users/ruantong/Desktop/localizable_str_json.txt'
 
@@ -33,7 +33,7 @@ def findFileChineseStr(filename):
 #                else:
 #                    result_chinese_dict[filename].append(r)
 
-        it = re.finditer(u'@".*?[\u4E00-\u9FA5]+?.*?"', line.decode('utf-8'))
+        it = re.finditer(u'@"?.*?[\u4E00-\u9FA5]+?.*?"', line.decode('utf-8'))
         for match in it:
             localizable_strings_dict[match.group().encode('utf-8')]='@""'
             if filename not in result_chinese_dict.keys():
@@ -83,6 +83,12 @@ def read_file(file_path):
     file.close()
     return read_data
 
+def encode_utf8(string):
+    return string.encode('utf-8')
+
+def decode_utf8(string):
+    return unicode(string, encoding='utf-8')
+
 def main():
     while True:
         a = input("输入数字1,匹配工程文件并把结果写入文件;输入数字2，替换文件匹配结果:")
@@ -110,13 +116,12 @@ def main():
                     result=localizable_file_dict[val.decode('utf8')]
                     if result != '@""':
                         replace(key,val,result)
-        
-            print '字符替换成功'
+                        print '已成功替换:%s,%s' %(val,result)
+
+            print '字符替换完成'
             break
 
 main()
-
-
 
 
 
