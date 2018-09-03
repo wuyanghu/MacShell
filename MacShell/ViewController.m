@@ -64,6 +64,7 @@
             [self.cacheLabelDict setObject:label forKey:key1];
         }
     }];
+    //amend
 }
 
 - (void)setRepresentedObject:(id)representedObject {
