@@ -14,7 +14,7 @@ sys.setdefaultencoding('utf-8')
 result_chinese_dict = {}
 localizable_strings_dict = {}
 
-project_path = '/Users/ruantong/Desktop/migu/githubMacShell/MacShell'
+project_path = '/Users/ruantong/Desktop/migu/cmread-tools/MacGitShell/MacShell'
 chinese_str_path = '/Users/ruantong/Desktop/chinese_str_json.txt'
 localizable_str_path = '/Users/ruantong/Desktop/localizable_str_json.txt'
 
@@ -34,6 +34,7 @@ def findFileChineseStr(filename):
 #                    result_chinese_dict[filename].append(r)
 
         it = re.finditer(u'@"?.*?[\u4E00-\u9FA5]+?.*?"', line.decode('utf-8'))
+#        it = re.finditer(u'^(?!NSLog()', line.decode('utf-8'))
         for match in it:
             localizable_strings_dict[match.group().encode('utf-8')]='@""'
             if filename not in result_chinese_dict.keys():
