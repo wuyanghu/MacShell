@@ -1,65 +1,12 @@
 #!/bin/sh
-
-#  startAuditScript.sh
-#  PrivilegedTaskExample
-#
-#  Created by ruantong on 2018/8/6.
-#  Copyright © 2018年 Sveinbjorn Thordarson. All rights reserved.
-
 #coding=utf-8
-
-commitParameter=$1 #获取参数
-project_path=$2 #工程路径
-sandbox_path=$3 #沙盒路径
-arccommand_path=$4 #arc命令所在目录
-
-cd $project_path
-
-#缓存文件
-arcidffreuslt_file_path=$sandbox_path/output.txt #arc diff 结果文件
-settinginfo_file_path=$sandbox_path/settingInfo.txt #审核信息配置文件
-gitstatus_s_file_path=$sandbox_path/gitdiff.txt #git status -s文件信息
-gitstatus_file_path=$sandbox_path/gitstatus.txt
-log_file_path=$sandbox_path/log.txt #运行日志信息
-
-echo "">$log_file_path
-#读取url复制到剪切板
-function readFileUrl ()
-{
-    if [ -f $arcidffreuslt_file_path ];then
-        result=$(grep -o "http://.*" $arcidffreuslt_file_path)
-        if [ $? -eq 0 ];then
-        echo $result | pbcopy
-        echo $result
-        fi
-    fi
-}
-#判断是否有推送
-function isPush()
-{
-    git status > $gitstatus_file_path
-
-    result=$(grep -o 'Your branch is ahead of' $gitstatus_file_path)
-    if [ "$result" != "" ];then
-        echo yes
-    else
-        echo no
-    fi
-}
-
-#判断是否有拉取
-function isPull()
-{
-    git status > $gitstatus_file_path
-
-    result=$(grep -o 'and have [0-9]* and [0-9]* different' $gitstatus_file_path)
-    result2=$(grep -o 'Your branch is behind ' $gitstatus_file_path)
-    if [ "$result" != "" -o "$result2" != "" ];then
-        echo yes
-    else
-        echo no
-    fi
-}
+#固定参数 $1:工程路径;$2:沙盒路径;$3 #获取参数
+#        $4:commit参数;$5:arc命令所在目录
+basepath=$(cd `dirname $0`; pwd)
+source $basepath/commonMethodScript.sh $1 $2
+executeCommand=$3 #执行参数
+commitParameter=$4 #commit参数
+arccommand_path=$5 #arc命令所在目录
 
 #arc diff生成url
 function arcdiffUrl ()
@@ -68,13 +15,21 @@ function arcdiffUrl ()
     #做一个缓存:没有url则--create;有url则--update
     if [[ "$result" == "" ]]
     then
-    echo create >>$log_file_path
-    $arccommand_path""arc diff --encoding GBK --create --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
+        echo '正在执行arc diff --create'>>$log_file_path
+        $arccommand_path""arc diff --encoding GBK --create --message-file $settinginfo_file_path 2>&1 | tee $arcidffreuslt_file_path  #从文件arcdiff.txt读取配置信息,把arc diff结果写入output.txt
     else
-    echo update""${result##*/} >>$log_file_path
-    $arccommand_path""arc diff --update ${result##*/} -m $commitParameter 2>&1 | tee $arcidffreuslt_file_path    #把arc diff结果写入output.txt
+        echo '正在更新arc diff --update'""${result##*/}>>$log_file_path
+        $arccommand_path""arc diff --update ${result##*/} -m $commitParameter 2>&1 | tee $arcidffreuslt_file_path    #把arc diff结果写入output.txt
     fi
+
+    if [[ $? -eq 0 ]];then
+        echo 'arc diff执行完成'>>$log_file_path
+    else
+        echo 'arc diff执行异常，请检查后重新尝试'>>$log_file_path
+    fi
+
 }
+
 
 #提交代码
 function commit ()
@@ -88,21 +43,33 @@ function commit ()
 
     if [[ "$diff" == "" ]]
     then
-        echo "本地文件没有修改" >>$log_file_path
+        echo "本地文件没有提交...">>$log_file_path
     else
-        echo "本地文件有修改" >>$log_file_path
+        echo "正在提交...">>$log_file_path
         git add .
 
-        isPushResult=$(isPush)
+        isPushResult=$(isPush $gitstatus_file_path)
         if [ "$isPushResult" == "yes" ]; then
-            git commit --amend -m $commitParameter
-            echo amend >>$log_file_path
+            git commit --amend -m $commitParameter >>$log_file_path
+            echo "追加提交...">>$log_file_path
         else
-            git commit -m $commitParameter
-            echo commit >>$log_file_path
+            git commit -m $commitParameter >>$log_file_path
+            echo "提交...">>$log_file_path
         fi
+        if [[ $? -eq 0 ]];then
+            echo "提交成功..."
+            echo "提交成功...">>$log_file_path
+        else
+            echo "提交失败，请检查后再尝试"
+            echo "提交失败，请检查后再尝试">>$log_file_path
+        fi
+
     fi
 
+}
+
+function arcdiff()
+{
 #执行arc diff条件
 #1.本地文件无修改，否则失败
 #2.已有推送可执行arc diff，否则失败
@@ -111,24 +78,34 @@ function commit ()
     diff=$(cat $gitstatus_s_file_path)
     if [[ "$diff" == "" ]]
     then
-        isPushResult=$(isPush)
+        isPushResult=$(isPush $gitstatus_file_path)
         if [ "$isPushResult" == "yes" ]; then
-            echo 'arcdiffurl' >>$log_file_path
+            echo '开始执行arc diff'>>$log_file_path
             arcdiffUrl
         else
-            echo 'no arcdiffurl' >>$log_file_path
+            echo '请先推送代码再执行arc diff'>>$log_file_path
         fi
     else
-        echo 'commit failure' >>$log_file_path
+        echo '还有代码未提交'>>$log_file_path
     fi
 }
 
-isPullResult=$(isPull)
-if [ "$isPullResult" == "yes" ];then
-    echo "有新的拉取消息，请先处理!"
-else
-    commit
-    readFileUrl
-fi
+function execresult()
+{
+    isPullResult=$(isPull $gitstatus_file_path)
+    if [ "$isPullResult" == "yes" ];then
+        echo "有新的拉取消息，请先处理!">>$log_file_path
+    else
+        #$executeCommand:1.提交代码 2.
+        if [ $executeCommand == "1" ];then
+            commit
+        elif [ $executeCommand == "2" ];then
+            arcdiff
+            readFileUrl
+        else
+            echo '1'
+        fi
+    fi
 
-
+}
+execresult $executeCommand

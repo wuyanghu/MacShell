@@ -12,6 +12,6 @@
 - (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle window:(NSWindow *)window;
 @end
 
-@interface CheckViewController : ViewController
+@interface CheckViewController : NSViewController
 @property (nonatomic,weak) id<CheckVCDelegate> delegate;
 @end

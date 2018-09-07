@@ -8,15 +8,21 @@
 
 #import "ViewController.h"
 #import "Help.h"
-#import "FileCache.h"
+#import "FileCacheManager.h"
 #import <Foundation/Foundation.h>
 #import "CheckViewController.h"
 #import "MonitorFileChangeHelp.h"
+#import "TaskOperationManager.h"
 
 @interface ViewController()<NSTextViewDelegate,CheckVCDelegate>
 @property (weak) IBOutlet NSButtonCell *arcCommandDirectoryButton;//arc工程所在目录
-@property (weak) IBOutlet NSButton *chineseButton;
-@property (weak) IBOutlet NSButton *englishButton;
+
+@property (weak) IBOutlet NSButton *startAuditButton;
+@property (weak) IBOutlet NSButton *finishAuditButton;
+
+@property (weak) IBOutlet NSButton *isCommitProjButton;
+@property (weak) IBOutlet NSButton *chineseButton;//中文
+@property (weak) IBOutlet NSButton *englishButton;//英文
 
 @property (weak) IBOutlet NSButton *chooseDirectoryButton;//工程目录
 @property (weak) IBOutlet NSStackView *stackView;
@@ -24,12 +30,19 @@
 @property (weak) IBOutlet NSTextField *placeLabel;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicatorView;//菊花圈
 
+@property (weak) IBOutlet NSTextField *commitLabel;
+@property (weak) IBOutlet NSTextField *arcLabel;
+@property (weak) IBOutlet NSTextField *pullLabel;
+@property (weak) IBOutlet NSTextField *pushLabel;
+@property (nonatomic,strong) NSMutableDictionary * commitProgressDict;
+
 @property (nonatomic,strong) NSMutableDictionary<NSString *,NSTextField*> * cacheLabelDict;
 
 @property (nonatomic,strong) NSMutableDictionary * auditPersonDictionary;
 @property (nonatomic,copy) NSString * chooseFilePath;//选择路径
 @property (nonatomic,copy) NSString * arcCommandPath;
-
+@property (nonatomic,copy) NSString * auditPersonStr;//审核人信息
+@property (nonatomic,copy) NSString * commitInfoStr;//commit信息
 @property (nonatomic,strong) MonitorFileChangeHelp *fileMonitor;
 
 @property (weak) IBOutlet NSLayoutConstraint *bottomConstraint;
@@ -39,22 +52,57 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+//初始化数据
+- (void)initData{
+    /*
+     语言初始化
+     */
     [self getAndSetArcLanguage];
     
-    self.logTextView.editable = NO;
-    self.logTextView.string = @"log日志输出";
+    /*
+     是否提交xcodeproj初始化
+     */
+    NSNumber * isCommitXcodeproj = (NSNumber *)[Help getUserDefaultObject:kIsCommitXcodeproj];
+    if(isCommitXcodeproj){
+        [self.isCommitProjButton setState:[isCommitXcodeproj integerValue]];
+    }else{
+        [self.isCommitProjButton setState:1];
+        [Help setUserDefaultObject:@(1) key:kIsCommitXcodeproj];
+    }
+    
+    /*
+     日志初始化
+     */
+    [[FileCacheManager shareInstance] readFileAsync:kLogTxt complete:^(NSString * logtxtContent) {
+        if(!logtxtContent){
+            [[FileCacheManager shareInstance] writeFileAsync:kLogTxt content:@"" complete:^(BOOL result) {
+                
+            }];
+        }
+        
+        self.logTextView.editable = NO;
+        
+        if (logtxtContent){
+            self.logTextView.string = logtxtContent;
+        }else{
+            self.logTextView.string = NSLocalizedString(@"logOutput", nil);
+        }
+    }];
+    
+    /*
+     commit信息初始化
+     */
     NSString * commitInfo = (NSString *)[Help getUserDefaultObject:kCommitInfo];
     if (commitInfo && ![commitInfo isEqualToString:@""]) {
         self.textView.string = commitInfo;
         self.placeLabel.hidden = YES;
     }
     self.textView.delegate = self;
-    [self.arcCommandDirectoryButton setTitle:self.arcCommandPath?self.arcCommandPath:@"请选择arc所在目录"];
-    [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:@"请选择工程目录"];
-    // Do any additional setup after loading the view
-    NSDictionary * auditInfoDict = [Help getAuditInfo];
+    
+    /*
+     审核人信息初始化
+     */
+    NSDictionary * auditInfoDict = (NSDictionary *)[Help getUserDefaultObject:kAuditInfoDict];
     [auditInfoDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         NSInteger value = [obj integerValue];
         NSString * key1 = (NSString *)key;
@@ -64,7 +112,44 @@
             [self.cacheLabelDict setObject:label forKey:key1];
         }
     }];
-    //amend1234
+    
+    /*
+     提交代码进度初始化
+     */
+    
+    NSString * progressCommitValue = self.commitProgressDict[kProgressCommitKey];
+    if([progressCommitValue isEqualToString:@"1"]){
+        self.commitLabel.backgroundColor = kCommitAfterColor;
+    }
+    
+    NSString * progressArcUrlValue = self.commitProgressDict[kProgressArcUrlKey];
+    if([progressArcUrlValue isEqualToString:@"1"]){
+        self.arcLabel.backgroundColor = kCommitAfterColor;
+    }
+    
+    NSString * progressPushValue = self.commitProgressDict[kProgressPushKey];
+    if([progressPushValue isEqualToString:@"1"]){
+        self.pushLabel.backgroundColor = kCommitAfterColor;
+    }
+    
+    NSString * progressPullValue = self.commitProgressDict[kProgressPullKey];
+    if([progressPullValue isEqualToString:@"1"]){
+        self.pullLabel.backgroundColor = kCommitAfterColor;
+    }
+    /*
+     监听log.txt文件变化
+     */
+    
+    [self listeningLogFile];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initData];
+    
+    [self.arcCommandDirectoryButton setTitle:self.arcCommandPath?self.arcCommandPath:NSLocalizedString(@"chooseArcPath", nil)];
+    [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:NSLocalizedString(@"chooseProjectPath", nil)];
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -88,22 +173,240 @@
     [[NSApplication sharedApplication].keyWindow.contentViewController presentViewControllerAsModalWindow:checkVC];;
 }
 
+- (void)dealloc{
+    [self cancelListeningLogFile];
+}
+
 #pragma mark - action
 
 - (IBAction)startAuditAction:(id)sender {
+    
     NSButton * button = (NSButton *)sender;
     button.enabled = NO;
     
-    if (!self.arcCommandPath){
+    if(![self isCheckStartAudit]){
         button.enabled = YES;
-        [self showAlertView:@"请选择arc命令目录!" window:nil];
         return;
     }
     
-    if (!self.chooseFilePath) {
+    [[FileCacheManager shareInstance] writeFileSync:kLogTxt content:@""];
+
+    NSString * arcCommandPathStr = [self.arcCommandPath substringFromIndex:7];//arc命令路径
+    
+    NSString * language = (NSString *)[Help getUserDefaultObject:kArcLanguagePath];
+    if ([language isEqualToString:NSLocalizedString(@"chinese", nil)]) {
+        [[FileCacheManager shareInstance] writeFileSync:@"settingInfo.txt" content:[NSString stringWithFormat:@"摘要:%@\n测试计划:na\n评审者:%@",_commitInfoStr,_auditPersonStr]];
+    }else{
+        [[FileCacheManager shareInstance] writeFileSync:@"settingInfo.txt" content:[NSString stringWithFormat:@"Summary:%@\nTest Plan:NA\nReviewers:%@",_commitInfoStr,_auditPersonStr]];
+    }
+    
+    NSMutableArray * paramsArray = [self getShellComParams:@"startAuditScript.sh"];
+    [paramsArray addObject:@"1"];
+    [paramsArray addObject:_commitInfoStr];
+    [paramsArray addObject:arcCommandPathStr];
+    
+    [self showProgressView];
+    
+    self.commitLabel.backgroundColor = kCommitBeforeColor;
+    self.pullLabel.backgroundColor = kCommitBeforeColor;
+    self.pushLabel.backgroundColor = kCommitBeforeColor;
+    self.arcLabel.backgroundColor = kCommitBeforeColor;
+    [self.commitProgressDict setObject:@"0" forKey:kProgressCommitKey];
+    [self.commitProgressDict setObject:@"0" forKey:kProgressArcUrlKey];
+    [self.commitProgressDict setObject:@"0" forKey:kProgressPullKey];
+    [self.commitProgressDict setObject:@"0" forKey:kProgressPushKey];
+    [Help setUserDefaultObject:self.commitProgressDict key:kCommitProgressDict];
+
+    TaskOperationManager * taskManager = [TaskOperationManager shareManager];
+    [taskManager addTaskOperationToQueue:[paramsArray copy] andFinishBlock:^(NSString *resultStr, NSTask *task) {
+        NSLog(@"%@",resultStr);
+        if([resultStr containsString:NSLocalizedString(@"commitSuccess", nil)]){
+            self.commitLabel.backgroundColor = kCommitAfterColor;
+            [self.commitProgressDict setObject:@"1" forKey:kProgressCommitKey];
+            [Help setUserDefaultObject:self.commitProgressDict key:kCommitProgressDict];
+        }
+    }];
+
+    [paramsArray replaceObjectAtIndex:3 withObject:@"2"];
+    [taskManager addTaskOperationToQueue:[paramsArray copy] andFinishBlock:^(NSString *resultStr, NSTask *task) {
         button.enabled = YES;
-        [self showAlertView:@"请选择工程目录!" window:nil];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        
+        [self hideProgressView];
+        NSString * extractUrl = [Help extractUrl:resultStr];
+        if (extractUrl) {
+            [self showAlertView:[NSString stringWithFormat:@"%@ 已生成并复制到粘贴板",extractUrl] window:nil];
+            self.arcLabel.backgroundColor = kCommitAfterColor;
+            [self.commitProgressDict setObject:@"1" forKey:kProgressArcUrlKey];
+            [Help setUserDefaultObject:self.commitProgressDict key:kCommitProgressDict];
+        }else{
+            [self showAlertView:NSLocalizedString(@"referLog", nil) window:nil];
+        }
+    }];
+
+    [self performSelector:@selector(cancelTask:) withObject:button afterDelay:60.0f];
+
+}
+
+- (IBAction)finishAuditAction:(id)sender {
+    
+    [[FileCacheManager shareInstance] writeFileSync:kLogTxt content:@""];
+    
+    NSButton * button  = (NSButton *)sender;
+    button.enabled = NO;
+    
+    NSString * arcCommandPathStr = [self.arcCommandPath substringFromIndex:7];//arc命令路径
+    
+    NSMutableArray * paramsArray = [self getShellComParams:@"finishAuditScript.sh"];
+    [paramsArray addObject:@"1"];
+    [paramsArray addObject:arcCommandPathStr];
+    [self showProgressView];
+
+    self.pullLabel.backgroundColor = kCommitBeforeColor;
+    self.pushLabel.backgroundColor = kCommitBeforeColor;
+    [self.commitProgressDict setObject:@"0" forKey:kProgressPullKey];
+    [self.commitProgressDict setObject:@"0" forKey:kProgressPushKey];
+    TaskOperationManager * taskManager = [TaskOperationManager shareManager];
+    [taskManager addTaskOperationToQueue:[paramsArray copy] andFinishBlock:^(NSString *resultStr, NSTask *task) {
+        //拉取代码
+        if([resultStr containsString:NSLocalizedString(@"pullSuccess", nil)]){
+            self.pullLabel.backgroundColor = kCommitAfterColor;
+            [self.commitProgressDict setObject:@"1" forKey:kProgressPullKey];
+            [Help setUserDefaultObject:self.commitProgressDict key:kCommitProgressDict];
+        }
+    }];
+    
+    [paramsArray replaceObjectAtIndex:3 withObject:@"2"];
+    [taskManager addTaskOperationToQueue:[paramsArray copy] andFinishBlock:^(NSString *resultStr, NSTask *task) {
+        //推送代码
+        button.enabled = YES;
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+
+        [self hideProgressView];
+        if ([resultStr containsString:NSLocalizedString(@"pushSuccess", nil)]){
+            self.pushLabel.backgroundColor = kCommitAfterColor;
+            [self.commitProgressDict setObject:@"1" forKey:kProgressPushKey];
+            
+            self.textView.string = @"";
+            self.placeLabel.hidden = NO;
+            [Help setUserDefaultObject:@"" key:kCommitInfo];
+            [Help setUserDefaultObject:self.commitProgressDict key:kCommitProgressDict];
+            [self showAlertView:NSLocalizedString(@"pushSuccess", nil) window:nil];
+        }else{
+            [self showAlertView:NSLocalizedString(@"referLog", nil) window:nil];
+        }
+        
+    }];
+    
+    [self performSelector:@selector(cancelTask:) withObject:button afterDelay:60.0f];
+}
+
+- (IBAction)arcCommandDirectoryAction:(id)sender {
+    [Help openPanel:self.arcCommandPath window:self.view.window block:^(NSString * path) {
+        [self.arcCommandDirectoryButton setTitle:path];
+        [Help storageFilePath:path key:kArcCommandPath];
+    }];
+}
+    
+    
+- (IBAction)chooseDirectoryAction:(id)sender {
+    [Help openPanel:self.chooseFilePath window:self.view.window block:^(NSString * path) {
+        [self.chooseDirectoryButton setTitle:path];
+    
+        [[FileCacheManager shareInstance] clearFileCache:@[@"output.txt",@"gitdiff.txt"]];
+        [Help storageFilePath:path key:kChooseFilePath];
+    }];
+}
+
+- (IBAction)isXcodeprojAction:(id)sender {
+    NSButton * button = (NSButton *)sender;
+    [Help setUserDefaultObject:@(button.state) key:kIsCommitXcodeproj];
+    
+    TaskOperationManager * taskManager = [TaskOperationManager shareManager];
+    NSMutableArray * paramArray = [self getShellComParams:@"gitignoreScript.sh"];
+    if(button.state == 1){
+        [paramArray addObject:@"1"];
+    }else{
+        [paramArray addObject:@"0"];
+    }
+    
+    [taskManager addTaskOperationToQueue:paramArray andFinishBlock:^(NSString *resultStr, NSTask *task) {
+        NSLog(@"%@",resultStr);
+    }];
+}
+
+- (IBAction)auditListAction:(id)sender {
+    [self showAlertCheckVC];
+}
+
+- (IBAction)chineseAction:(id)sender {
+    self.englishButton.state = !self.chineseButton.state;
+    [Help setUserDefaultObject:NSLocalizedString(@"chinese", nil) key:kArcLanguagePath];
+}
+
+- (IBAction)englistAction:(id)sender {
+    self.chineseButton.state = !self.englishButton.state;
+    [Help setUserDefaultObject:@"English" key:kArcLanguagePath];
+}
+
+- (IBAction)showLogAction:(id)sender {
+    NSButton * button = (NSButton *)sender;
+    
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.2];
+    [self.bottomConstraint.animator setConstant:button.state == 1?180:20];
+    [NSAnimationContext endGrouping];
+    
+}
+
+
+#pragma mark - CheckVCDelegate
+
+- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle window:(NSWindow *)window{
+    NSLog(@"%@-%ld",checkTitle,button.state);
+    if (self.cacheLabelDict.allKeys.count==5 && button.state == 1) {
+        button.state = 0;
+        [self showAlertView:NSLocalizedString(@"chooseMaxAuditCount", nil) window:window];
         return;
+    }
+   
+    if (button.state == 1) {
+        NSTextField * label = [self createLabel:checkTitle];
+        [self.stackView addView:label inGravity:NSStackViewGravityLeading];
+        [self.cacheLabelDict setObject:label forKey:checkTitle];
+    }else{
+        NSTextField * label = self.cacheLabelDict[checkTitle];
+        [self.stackView removeView:label];
+        [self.cacheLabelDict removeObjectForKey:checkTitle];
+    }
+    [self.auditPersonDictionary setObject:@(button.state) forKey:checkTitle];
+    [Help setUserDefaultObject:self.auditPersonDictionary key:kAuditInfoDict];
+}
+
+#pragma mark - NSTextViewDelegate
+
+- (void)textDidChange:(NSNotification *)notification{
+    NSTextView * textView = (NSTextView *)notification.object;
+    if ([textView.string isEqualToString:@""]) {
+        self.placeLabel.hidden = NO;
+    }else{
+        self.placeLabel.hidden = YES;
+    }
+    [Help setUserDefaultObject:textView.string key:kCommitInfo];
+}
+
+#pragma mark - private mothod
+
+//检查审核信息是否合格
+- (BOOL)isCheckStartAudit{
+    if (!self.arcCommandPath){
+        [self showAlertView:NSLocalizedString(@"chooseArcPath", nil) window:nil];
+        return NO;
+    }
+    
+    if (!self.chooseFilePath) {
+        [self showAlertView:NSLocalizedString(@"chooseProjectPath", nil) window:nil];
+        return NO;
     }
     
     __block NSUInteger chooseAuditCount = 0;
@@ -122,188 +425,30 @@
     }];
     
     if (chooseAuditCount < 3) {
-        button.enabled = YES;
-        [self showAlertView:@"审核人员至少3个!" window:nil];
-        return;
+        [self showAlertView:NSLocalizedString(@"chooseMinAuditCount", nil) window:nil];
+        return NO;
     }
-
-    NSString * commitInfoStr = [self removeSpaceAndNewline:self.textView.string];
+    
+    NSString * commitInfoStr = [Help removeSpaceAndNewline:self.textView.string];
     if ([commitInfoStr isEqualToString:@""] || !commitInfoStr) {
-        button.enabled = YES;
-        [self showAlertView:@"请输入commit信息" window:nil];
-        return;
+        [self showAlertView:NSLocalizedString(@"printCommitInfo", nil) window:nil];
+        return NO;
     }
-    
-    NSString * projectPathStr = [self.chooseFilePath substringFromIndex:7];//工程路径
-    NSString * arcCommandPathStr = [self.arcCommandPath substringFromIndex:7];//arc命令路径
-    
-    NSString * language = (NSString *)[Help getUserDefaultObject:kArcLanguagePath];
-    if ([language isEqualToString:NSLocalizedString(@"chinese", nil)]) {
-        [FileCache writeFile:@"settingInfo.txt" content:[NSString stringWithFormat:@"摘要:%@\n测试计划:na\n评审者:%@",commitInfoStr,auditPersonStr]];
-    }else{
-        [FileCache writeFile:@"settingInfo.txt" content:[NSString stringWithFormat:@"Summary:%@\nTest Plan:na\nReviewers:%@",commitInfoStr,auditPersonStr]];
-    }
-    
-    NSArray * array = @[@"startAuditScript.sh",commitInfoStr,projectPathStr,[FileCache getDoucumentPath],arcCommandPathStr];
-    self.progressIndicatorView.hidden = NO;
-    [self.progressIndicatorView startAnimation:nil];
-    
-    [self listeningLogFile];
-    
-    NSTask * task = [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            button.enabled = YES;
-            [NSObject cancelPreviousPerformRequestsWithTarget:self];
-            [self cancelListeningLogFile];
-        });
-        [self hideProgressView];
-        
-        NSString * outputTxt = [FileCache readFile:@"output.txt"];
-        NSString * extractUrl = [self extractUrl:outputTxt];
-        if (extractUrl) {
-            [self showAlertView:[NSString stringWithFormat:@"%@ 已生成并复制到粘贴板",extractUrl] window:nil];
-        }else{
-            NSString * message = @"";
-            if (outputTxt){
-                message = outputTxt;
-            }else{
-                if(resultStr){
-                    message = resultStr;
-                }
-            }
-            if (![message isEqualToString:@""]) {
-                [self showAlertView:message window:nil];
-            }
-        }
-    }];
-    [self performSelector:@selector(cancelTask:) withObject:task afterDelay:60.0f];
-
-}
-
-- (IBAction)finishAuditAction:(id)sender {
-    
-    NSButton * button  = (NSButton *)sender;
-    button.enabled = NO;
-    
-    NSString * projectPathStr = [self.chooseFilePath substringFromIndex:7];//工程路径
-    NSArray * array = @[@"finishAuditScript.sh",projectPathStr,[FileCache getDoucumentPath]];
-    self.progressIndicatorView.hidden = NO;
-    [self.progressIndicatorView startAnimation:nil];
-    NSTask * task = [Help runTask:array block:^(NSString *resultStr,NSTask * task) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            button.enabled = YES;
-            [NSObject cancelPreviousPerformRequestsWithTarget:self];
-            if (resultStr && ![resultStr isEqualToString:@""]) {
-                self.textView.string = @"";
-                self.placeLabel.hidden = NO;
-                [Help storageUserDefaultObject:@"" key:kCommitInfo];
-            }
-        });
-        [self hideProgressView];
-        if (resultStr) {
-            [self showAlertView:resultStr window:nil];
-        }
-    }];
-    [self performSelector:@selector(cancelTask:) withObject:task afterDelay:60.0f];
-}
-
-- (IBAction)arcCommandDirectoryAction:(id)sender {
-    [Help openPanel:self.arcCommandPath window:self.view.window block:^(NSString * path) {
-        [self.arcCommandDirectoryButton setTitle:path];
-        [Help storageFilePath:path key:kArcCommandPath];
-    }];
-}
-    
-    
-- (IBAction)chooseDirectoryAction:(id)sender {
-    [Help openPanel:self.chooseFilePath window:self.view.window block:^(NSString * path) {
-        [self.chooseDirectoryButton setTitle:path];
-    
-        [FileCache clearFileCache:@[@"output.txt",@"gitdiff.txt"]];
-        [Help storageFilePath:path key:kChooseFilePath];
-    }];
-}
-
-- (IBAction)auditListAction:(id)sender {
-    [self showAlertCheckVC];
-}
-
-- (IBAction)chineseAction:(id)sender {
-    self.englishButton.state = !self.chineseButton.state;
-    [Help storageUserDefaultObject:NSLocalizedString(@"chinese", nil) key:kArcLanguagePath];
-}
-
-- (IBAction)englistAction:(id)sender {
-    self.chineseButton.state = !self.englishButton.state;
-    [Help storageUserDefaultObject:@"English" key:kArcLanguagePath];
-}
-
-- (IBAction)showLogAction:(id)sender {
-    NSButton * button = (NSButton *)sender;
-    NSLog(@"%ld",button.state);
-    
-    [NSAnimationContext beginGrouping];
-    [[NSAnimationContext currentContext] setDuration:0.2];
-    [self.bottomConstraint.animator setConstant:button.state == 1?180:20];
-    [NSAnimationContext endGrouping];
-    
-}
-
-
-#pragma mark - CheckVCDelegate
-
-- (void)checkAction:(NSButton *)button checkTitle:(NSString *)checkTitle window:(NSWindow *)window{
-    NSLog(@"%@-%ld",checkTitle,button.state);
-    if (self.cacheLabelDict.allKeys.count==5 && button.state == 1) {
-        button.state = 0;
-        [self showAlertView:@"审核人最多只能选择5个" window:window];
-        return;
-    }
-   
-    if (button.state == 1) {
-        NSTextField * label = [self createLabel:checkTitle];
-        [self.stackView addView:label inGravity:NSStackViewGravityLeading];
-        [self.cacheLabelDict setObject:label forKey:checkTitle];
-    }else{
-        NSTextField * label = self.cacheLabelDict[checkTitle];
-        [self.stackView removeView:label];
-        [self.cacheLabelDict removeObjectForKey:checkTitle];
-    }
-    [self.auditPersonDictionary setObject:@(button.state) forKey:checkTitle];
-    [Help storageAuditInfo:self.auditPersonDictionary];
-}
-
-#pragma mark - NSTextViewDelegate
-
-- (void)textDidChange:(NSNotification *)notification{
-    NSTextView * textView = (NSTextView *)notification.object;
-    if ([textView.string isEqualToString:@""]) {
-        self.placeLabel.hidden = NO;
-    }else{
-        self.placeLabel.hidden = YES;
-    }
-    [Help storageUserDefaultObject:textView.string key:kCommitInfo];
-}
-
-#pragma mark - private mothod
-//移除字符串中的换行和空格
-- (NSString *)removeSpaceAndNewline:(NSString *)str
-{
-    NSString *temp = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
-    temp = [temp stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-    temp = [temp stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    return temp;
+    _auditPersonStr = auditPersonStr;
+    _commitInfoStr = commitInfoStr;
+    return YES;
 }
 
 - (void)listeningLogFile{
-    [FileCache writeFile:@"log.txt" content:@""];
+    NSString * logtxt = kLogTxt;
+    
     if (!_fileMonitor) {
         _fileMonitor = [MonitorFileChangeHelp new];
     }
-    NSString * path = [NSString stringWithFormat:@"%@/%@",[FileCache getDoucumentPath],@"log.txt"];
+    NSString * path = [NSString stringWithFormat:@"%@/%@",[[FileCacheManager shareInstance] getDoucumentPath],logtxt];
     [_fileMonitor watcherForPath:path block:^(NSInteger type) {
-        NSString * logContent = [FileCache readFile:@"log.txt"];
-        self.logTextView.string = logContent;
+        NSString * logContent = [[FileCacheManager shareInstance] readFileSync:logtxt];
+        self.logTextView.string = logContent?logContent:@"";
     }];
 }
 
@@ -315,7 +460,7 @@
     NSString * language = (NSString *)[Help getUserDefaultObject:kArcLanguagePath];
     if (!language) {
         [Help getArcLanguage:^(NSString * languageParm) {
-            [Help storageUserDefaultObject:languageParm key:kArcLanguagePath];
+            [Help setUserDefaultObject:languageParm key:kArcLanguagePath];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([languageParm isEqualToString:NSLocalizedString(@"chinese", nil)]) {
@@ -338,80 +483,87 @@
     }
 }
 
-- (void)cancelTask:(NSTask *)task{
-    NSLog(@"cancelTask");
-    if (task.isRunning) {
-        [self showAlertView:@"脚本运行超时" window:nil];
-        [task terminate];
-    }
+- (void)cancelTask:(NSButton *)button{
+    [self hideProgressView];
+    
+    button.enabled = YES;
+    
+    TaskOperationManager * taskManager = [TaskOperationManager shareManager];
+    [taskManager cancelOperation];
+    [self showRestartAlertView:NSLocalizedString(@"shellRunTimeOutTypAgain", nil) window:nil button:button];
+}
+    
+- (void)showProgressView{
+    self.progressIndicatorView.hidden = NO;
+    [self.progressIndicatorView startAnimation:nil];
 }
 
 - (void)hideProgressView{
-    if ([NSThread isMainThread]) {
-        [self.progressIndicatorView stopAnimation:nil];
-        self.progressIndicatorView.hidden = YES;
-    }else{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.progressIndicatorView stopAnimation:nil];
-            self.progressIndicatorView.hidden = YES;
-        });
-    }
+    [self.progressIndicatorView stopAnimation:nil];
+    self.progressIndicatorView.hidden = YES;
 }
 
+- (void)showRestartAlertView:(NSString *)messageText window:(NSWindow *)window button:(NSButton *)button{
+    if (!window) {
+        window = self.view.window;
+    }
+    NSAlert *alert = [NSAlert new];
+    [alert addButtonWithTitle:NSLocalizedString(@"retry", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
+    [alert setMessageText:messageText];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
+        if(returnCode == NSAlertFirstButtonReturn){
+            NSLog(@"重试");
+            if(button == self.startAuditButton){
+                [self startAuditAction:button];
+            }else if(button == self.finishAuditButton){
+                [self finishAuditAction:button];
+            }
+            
+        }else if(returnCode == NSAlertSecondButtonReturn){
+            NSLog(@"取消");
+        }
+    }];
+}
+    
 - (void)showAlertView:(NSString *)messageText window:(NSWindow *)window{
-    if ([NSThread isMainThread]) {
-        if (!window) {
-            window = self.view.window;
-        }
-        NSAlert *alert = [NSAlert new];
-        [alert addButtonWithTitle:@"确定"];
-        [alert setMessageText:messageText];
-        [alert setAlertStyle:NSInformationalAlertStyle];
-        [alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
-            if(returnCode == NSAlertFirstButtonReturn){
-                NSLog(@"确定");
-            }
-        }];
-    }else{
-        __block NSWindow * window2 = window;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!window2) {
-                window2 = self.view.window;
-            }
-            NSAlert *alert = [NSAlert new];
-            [alert addButtonWithTitle:@"确定"];
-            [alert setMessageText:messageText];
-            [alert setAlertStyle:NSInformationalAlertStyle];
-            [alert beginSheetModalForWindow:window2 completionHandler:^(NSModalResponse returnCode) {
-                if(returnCode == NSAlertFirstButtonReturn){
-                    NSLog(@"确定");
-                    window2 = nil;
-                }
-            }];
-        });
+    if (!window) {
+        window = self.view.window;
     }
-}
-
-//提取url
-- (NSString *)extractUrl:(NSString *)content{
-    if ([content containsString:@"URI: http://"]) {
-        NSError *error;
-        NSString *regulaStr = @"\\bhttp?://[a-zA-Z0-9\\-.]+(?::(\\d+))?(?:(?:/[a-zA-Z0-9\\-._?,'+\\&%$=~*!():@\\\\]*)+)?";
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
-                                                                               options:NSRegularExpressionCaseInsensitive
-                                                                                 error:&error];
-        NSArray *arrayOfAllMatches = [regex matchesInString:content options:0 range:NSMakeRange(0, [content length])];
-        
-        for (NSTextCheckingResult *match in arrayOfAllMatches)
-        {
-            NSString* substringForMatch = [content substringWithRange:match.range];
-            return substringForMatch;
+    NSAlert *alert = [NSAlert new];
+    [alert addButtonWithTitle:NSLocalizedString(@"sure", nil)];
+    [alert setMessageText:messageText];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
+        if(returnCode == NSAlertFirstButtonReturn){
+            NSLog(@"确定");
         }
-    }
-    return nil;
+    }];
 }
 
 #pragma mark - getter
+
+- (NSMutableDictionary *)commitProgressDict{
+    if(!_commitProgressDict){
+        NSDictionary * commitDict = (NSDictionary *)[Help getUserDefaultObject:kCommitProgressDict];
+        _commitProgressDict = [[NSMutableDictionary alloc] initWithDictionary:commitDict];
+    }
+    return _commitProgressDict;
+}
+
+- (NSMutableArray *)getShellComParams:(NSString *)shellName{
+    /*
+        脚本前几个固定参数
+        参数1:脚本名
+        参数2:工程路径
+        参数3:缓存路径
+     */
+    NSString * projectPath = [self.chooseFilePath substringFromIndex:7];//工程路径
+    NSString * sandboxPath = [[FileCacheManager shareInstance] getDoucumentPath];
+    NSMutableArray * paramArray = [[NSMutableArray alloc] initWithArray:@[shellName,projectPath,sandboxPath]];
+    return paramArray;
+}
 
 - (NSMutableDictionary<NSString *,NSTextField *> *)cacheLabelDict{
     if (!_cacheLabelDict) {
@@ -425,7 +577,7 @@
     
     return _chooseFilePath;
 }
-    
+
 - (NSString *)arcCommandPath{
     _arcCommandPath = [Help getFilePath:kArcCommandPath];
     
@@ -434,7 +586,7 @@
     
 - (NSMutableDictionary *)auditPersonDictionary{
     if (!_auditPersonDictionary) {
-        NSDictionary * auditInfoDict = [Help getAuditInfo];
+        NSDictionary * auditInfoDict = (NSDictionary *)[Help getUserDefaultObject:kAuditInfoDict];
         _auditPersonDictionary = [[NSMutableDictionary alloc] initWithDictionary:auditInfoDict];
     }
     return _auditPersonDictionary;

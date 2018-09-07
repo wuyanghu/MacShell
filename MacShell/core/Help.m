@@ -25,11 +25,14 @@
     task.terminationHandler = ^(NSTask * task) {
         NSData *outputData = [readHandle readDataToEndOfFile];
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-        block(outputString,task);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(outputString,task);
+        });
+
     };
     
     [task launch];
-    
+   
     return task;
 }
 
@@ -77,20 +80,6 @@
 
 #pragma mark - 存储
 
-//存储审核人信息
-+ (void)storageAuditInfo:(NSMutableDictionary *)auditInfoDict{
-    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:auditInfoDict forKey:@"auditInfoDict"];
-    [userDefaults synchronize];
-}
-
-//获取审核人信息
-+ (NSDictionary *)getAuditInfo{
-    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary * auditInfoDict = [userDefaults objectForKey:@"auditInfoDict"];
-    return auditInfoDict;
-}
-
 //缓存选择文件路径
 + (void)storageFilePath:(NSString *)path key:(NSString *)key{
     path = [NSString stringWithFormat:@"file://%@",path];
@@ -119,7 +108,7 @@
     return [allowedUrl absoluteString];
 }
 
-+ (void)storageUserDefaultObject:(NSObject *)obj key:(NSString *)key{
++ (void)setUserDefaultObject:(NSObject *)obj key:(NSString *)key{
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     if (obj && key) {
         [userDefaults setObject:obj forKey:key];
@@ -158,7 +147,7 @@
                 NSDictionary * responseDict = (NSDictionary *)responseObject;
                 if (responseDict) {
                     NSString * result = responseDict[@"result"];
-                    if ([result containsString:@"摘要:"]) {
+                    if ([result containsString:NSLocalizedString(@"summary", nil)]) {
                         block(NSLocalizedString(@"chinese", nil));
                     }else if ([result containsString:@"Summary:"]){
                         block(@"English");
@@ -173,4 +162,32 @@
     
 }
 
+#pragma mark - 提取url，剔除字符串换行和空格
+//提取url
++ (NSString *)extractUrl:(NSString *)content{
+    if ([content containsString:@"URI: http://"]) {
+        NSError *error;
+        NSString *regulaStr = @"\\bhttp?://[a-zA-Z0-9\\-.]+(?::(\\d+))?(?:(?:/[a-zA-Z0-9\\-._?,'+\\&%$=~*!():@\\\\]*)+)?";
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
+                                                                               options:NSRegularExpressionCaseInsensitive
+                                                                                 error:&error];
+        NSArray *arrayOfAllMatches = [regex matchesInString:content options:0 range:NSMakeRange(0, [content length])];
+        
+        for (NSTextCheckingResult *match in arrayOfAllMatches)
+        {
+            NSString* substringForMatch = [content substringWithRange:match.range];
+            return substringForMatch;
+        }
+    }
+    return nil;
+}
+
+//移除字符串中的换行和空格
++ (NSString *)removeSpaceAndNewline:(NSString *)str
+{
+    NSString *temp = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    temp = [temp stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    temp = [temp stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    return temp;
+}
 @end

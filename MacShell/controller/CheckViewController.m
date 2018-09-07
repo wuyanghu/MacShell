@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    self.title = @"选择审核人信息";
+    self.title = NSLocalizedString(@"chooseAuditInfo", nil);
     self.view.frame = CGRectMake(0, 0, 250, self.view.frame.size.height);
     [self addView];
 }
@@ -87,7 +87,8 @@
 
 - (NSDictionary *)auditInfoDict{
     if (!_auditInfoDict) {
-        _auditInfoDict = [NSDictionary dictionaryWithDictionary:[Help getAuditInfo]];
+        NSDictionary * dict = (NSDictionary *)[Help getUserDefaultObject:kAuditInfoDict];
+        _auditInfoDict = [NSDictionary dictionaryWithDictionary:dict];
     }
     return _auditInfoDict;
 }
