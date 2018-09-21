@@ -19,7 +19,7 @@
     // Insert code here to initialize your application
     self.window = [NSApplication sharedApplication].keyWindow;
     [[self.window standardWindowButton:NSWindowZoomButton] setHidden:YES];
-    //commit
+    //1
 }
 
 
