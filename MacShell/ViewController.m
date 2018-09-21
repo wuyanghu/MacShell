@@ -297,7 +297,7 @@
         }
         
     }];
-    //1112345
+    //6
     [self performSelector:@selector(cancelTask:) withObject:button afterDelay:60.0f];
 }
 
