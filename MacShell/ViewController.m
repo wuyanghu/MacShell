@@ -149,7 +149,7 @@
     
     [self.arcCommandDirectoryButton setTitle:self.arcCommandPath?self.arcCommandPath:NSLocalizedString(@"chooseArcPath", nil)];
     [self.chooseDirectoryButton setTitle:self.chooseFilePath?self.chooseFilePath:NSLocalizedString(@"chooseProjectPath", nil)];
-//111
+//1112
 }
 
 - (void)setRepresentedObject:(id)representedObject {
