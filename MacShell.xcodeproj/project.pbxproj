@@ -26,6 +26,7 @@
 		4B2D2F7D211BE85E00DFF886 /* FileCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2F7C211BE85E00DFF886 /* FileCacheManager.m */; };
 		4B2D2F7E211BEEF100DFF886 /* FileCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2F7C211BE85E00DFF886 /* FileCacheManager.m */; };
 		4B2D2FD6211E7A9900DFF886 /* CheckNSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */; };
+		4B2E24502256038800D3BA35 /* renameIntro.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4B2E244F2256038800D3BA35 /* renameIntro.sh */; };
 		4B7634A6213CCC8A00538128 /* commonMethodScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4B7634A5213CCC8A00538128 /* commonMethodScript.sh */; };
 		4B7634A8213D2F4700538128 /* gitignoreScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4B7634A7213D2F4700538128 /* gitignoreScript.sh */; };
 		4BC386CA212571A7001A8B2A /* MonitorFileChangeHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC386C9212571A7001A8B2A /* MonitorFileChangeHelp.m */; };
@@ -89,6 +90,7 @@
 		4B2D2F7C211BE85E00DFF886 /* FileCacheManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileCacheManager.m; sourceTree = "<group>"; };
 		4B2D2FD4211E7A9900DFF886 /* CheckNSTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckNSTableViewCell.h; sourceTree = "<group>"; };
 		4B2D2FD5211E7A9900DFF886 /* CheckNSTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckNSTableViewCell.m; sourceTree = "<group>"; };
+		4B2E244F2256038800D3BA35 /* renameIntro.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = renameIntro.sh; sourceTree = "<group>"; };
 		4B5301C4213E336B007430BF /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
 		4B7634A5213CCC8A00538128 /* commonMethodScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = commonMethodScript.sh; sourceTree = "<group>"; };
 		4B7634A7213D2F4700538128 /* gitignoreScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gitignoreScript.sh; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		4B2D2F76211BD3D200DFF886 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B2E244F2256038800D3BA35 /* renameIntro.sh */,
 				4BC5DC16214265D400812FDF /* traveDir.py */,
 				4B031FCB2124448C0079A14C /* Localizable.strings */,
 				4B031F952124246E0079A14C /* gettoken.sh */,
@@ -405,6 +408,7 @@
 				4BF89A642115F15D00693897 /* Assets.xcassets in Resources */,
 				4B031FCC2124448C0079A14C /* Localizable.strings in Resources */,
 				4B7634A8213D2F4700538128 /* gitignoreScript.sh in Resources */,
+				4B2E24502256038800D3BA35 /* renameIntro.sh in Resources */,
 				4B2D2F79211BD3F400DFF886 /* finishAuditScript.sh in Resources */,
 				4BC5DC17214265D400812FDF /* traveDir.py in Resources */,
 				4B031F962124246F0079A14C /* gettoken.sh in Resources */,
@@ -613,8 +617,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MacShell/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,6 +628,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruantong.MacShell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -630,8 +636,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MacShell/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -640,6 +647,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruantong.MacShell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
