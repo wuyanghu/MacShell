@@ -95,7 +95,7 @@
 
 - (NSArray<NSString *> *)tableViewDataSourceArr{
     if (!_tableViewDataSourceArr) {
-        _tableViewDataSourceArr = @[@"chensong",@"shezhiqiang",@"wenjianfen",@"yuanrunli",@"xubing",@"yangguang",@"peixujie",@"zhangrui",@"yingqingyuan",@"wupeng"];
+        _tableViewDataSourceArr = @[@"zhangsan",@"lisi",@"wangwu"];//配置审核人
     }
     return _tableViewDataSourceArr;
 }
