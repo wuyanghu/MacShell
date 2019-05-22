@@ -487,7 +487,7 @@
     [self hideProgressView];
     
     button.enabled = YES;
-    
+
     TaskOperationManager * taskManager = [TaskOperationManager shareManager];
     [taskManager cancelOperation];
     [self showRestartAlertView:NSLocalizedString(@"shellRunTimeOutTypAgain", nil) window:nil button:button];
