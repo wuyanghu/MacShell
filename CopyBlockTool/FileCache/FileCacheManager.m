@@ -118,17 +118,6 @@ static char *queueName = "fileManagerQueue";
     return content;
 }
 
-- (NSArray *)getPathAllFile{
-    NSFileManager *fm = [NSFileManager defaultManager];
-
-    NSError *errDir = nil;
-    NSArray *contents = [fm contentsOfDirectoryAtPath:[FileCacheManager getDoucumentPath] error:&errDir];
-    if (!errDir) {
-        return contents;
-    }
-    return nil;
-}
-
 //清除缓存
 - (void)clearFileCache:(NSArray *)fileNameArr{
     dispatch_sync(_queue, ^{
@@ -148,6 +137,17 @@ static char *queueName = "fileManagerQueue";
 
 - (void)clearAllCache{
     
+}
+
++ (NSArray *)getPathAllFile{
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    NSError *errDir = nil;
+    NSArray *contents = [fm contentsOfDirectoryAtPath:[FileCacheManager getDoucumentPath] error:&errDir];
+    if (!errDir) {
+        return contents;
+    }
+    return nil;
 }
 
 //获取文件沙盒路径

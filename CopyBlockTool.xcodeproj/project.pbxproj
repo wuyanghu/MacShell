@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4B31F42822954EF1005D88DB /* rm.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4B31F42722954EF1005D88DB /* rm.sh */; };
-		4B31F42B22955F2D005D88DB /* TaskHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F42A22955F2D005D88DB /* TaskHelp.m */; };
 		4B31F42F229567FF005D88DB /* TaskCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F42E229567FF005D88DB /* TaskCommand.m */; };
 		4B31F4322295686C005D88DB /* ClearCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F4312295686C005D88DB /* ClearCommand.m */; };
 		4B31F4352295697C005D88DB /* UnzipCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F4342295697C005D88DB /* UnzipCommand.m */; };
@@ -48,8 +47,6 @@
 
 /* Begin PBXFileReference section */
 		4B31F42722954EF1005D88DB /* rm.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = rm.sh; sourceTree = "<group>"; };
-		4B31F42922955F2D005D88DB /* TaskHelp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskHelp.h; sourceTree = "<group>"; };
-		4B31F42A22955F2D005D88DB /* TaskHelp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskHelp.m; sourceTree = "<group>"; };
 		4B31F42D229567FF005D88DB /* TaskCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskCommand.h; sourceTree = "<group>"; };
 		4B31F42E229567FF005D88DB /* TaskCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskCommand.m; sourceTree = "<group>"; };
 		4B31F4302295686C005D88DB /* ClearCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClearCommand.h; sourceTree = "<group>"; };
@@ -153,7 +150,6 @@
 				4B31F42C229567D4005D88DB /* TaskCommand */,
 				4BAE28FE229521FF00393F39 /* XMLParse */,
 				4B98880A2294F0CB00E3D1F4 /* FileCache */,
-				4B9888032294EF6200E3D1F4 /* NSTask */,
 				4B9888002294EC5700E3D1F4 /* Shell */,
 				4B9887962294E0DE00E3D1F4 /* View */,
 				4B9887662294DEFC00E3D1F4 /* AppDelegate.h */,
@@ -207,15 +203,6 @@
 				4B31F42722954EF1005D88DB /* rm.sh */,
 			);
 			path = Shell;
-			sourceTree = "<group>";
-		};
-		4B9888032294EF6200E3D1F4 /* NSTask */ = {
-			isa = PBXGroup;
-			children = (
-				4B31F42922955F2D005D88DB /* TaskHelp.h */,
-				4B31F42A22955F2D005D88DB /* TaskHelp.m */,
-			);
-			path = NSTask;
 			sourceTree = "<group>";
 		};
 		4B98880A2294F0CB00E3D1F4 /* FileCache */ = {
@@ -383,7 +370,6 @@
 				4B9887732294DEFC00E3D1F4 /* main.m in Sources */,
 				4BAE290422952A9F00393F39 /* TitleTableCellView.m in Sources */,
 				4B31F43822956CBA005D88DB /* CpCommand.m in Sources */,
-				4B31F42B22955F2D005D88DB /* TaskHelp.m in Sources */,
 				4B9887682294DEFC00E3D1F4 /* AppDelegate.m in Sources */,
 				4B9887992294E0E700E3D1F4 /* DragInView.m in Sources */,
 			);

@@ -11,7 +11,6 @@
 #import "FileCacheManager.h"
 #import "XMLDictionary.h"
 #import "TitleTableCellView.h"
-#import "TaskHelp.h"
 #import "ClearCommand.h"
 #import "UnzipCommand.h"
 #import "CpCommand.h"
@@ -19,7 +18,6 @@
 @interface ViewController()<DragInViewDelegate,NSTableViewDataSource,NSTableViewDelegate>
 @property (weak) IBOutlet DragInView *dragInView;
 @property (weak) IBOutlet NSTableView *tableView;
-
 
 @property (nonatomic,strong) NSArray * tableViewDatas;
 @end
@@ -114,9 +112,9 @@
 
 - (NSArray *)getTitlesFromFiles {
     NSMutableArray<NSString *> * titles = [NSMutableArray new];
-    FileCacheManager * cacheManager = [FileCacheManager shareInstance];
-    NSArray * files = [cacheManager getPathAllFile];
+    NSArray * files = [FileCacheManager getPathAllFile];
     for (NSString * path in files) {
+        FileCacheManager * cacheManager = [FileCacheManager shareInstance];
         NSString * content = [cacheManager readFileSync:path];
         
         XMLDictionaryParser *parser=[[XMLDictionaryParser alloc]init];

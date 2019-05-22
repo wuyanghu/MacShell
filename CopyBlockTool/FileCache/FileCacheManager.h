@@ -19,8 +19,7 @@
 
 - (void)clearFileCache:(NSArray *)fileNameArr;//清除缓存
 
-- (NSArray *)getPathAllFile;
-
++ (NSArray *)getPathAllFile;
 +(NSString *)getDoucumentPath;//获取doucument路径
 
 @end
