@@ -1,2 +1,2 @@
 # MacShell
-git 脚本编写
+arc diff工具开发
