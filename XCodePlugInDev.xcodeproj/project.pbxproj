@@ -1,0 +1,835 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B2E28D622928587004F2D99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E28D522928587004F2D99 /* AppDelegate.m */; };
+		4B2E28D922928587004F2D99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E28D822928587004F2D99 /* ViewController.m */; };
+		4B2E28DB22928587004F2D99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B2E28DA22928587004F2D99 /* Assets.xcassets */; };
+		4B2E28DE22928587004F2D99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B2E28DC22928587004F2D99 /* Main.storyboard */; };
+		4B2E28E122928587004F2D99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E28E022928587004F2D99 /* main.m */; };
+		4B2E28EC22928587004F2D99 /* XCodePlugInDevTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E28EB22928587004F2D99 /* XCodePlugInDevTests.m */; };
+		4B2E28F722928587004F2D99 /* XCodePlugInDevUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E28F622928587004F2D99 /* XCodePlugInDevUITests.m */; };
+		4B2E290B229285B8004F2D99 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2E290A229285B8004F2D99 /* Cocoa.framework */; };
+		4B2E290F229285B8004F2D99 /* SourceEditorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E290E229285B8004F2D99 /* SourceEditorExtension.m */; };
+		4B2E2912229285B8004F2D99 /* SourceEditorCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E2911229285B8004F2D99 /* SourceEditorCommand.m */; };
+		4B2E2917229285B8004F2D99 /* EditorExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4B2E2908229285B8004F2D99 /* EditorExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4B2E2920229285F1004F2D99 /* ResetImportPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E291F229285F1004F2D99 /* ResetImportPort.m */; };
+		4B2E292722929FA2004F2D99 /* HintComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E292622929FA2004F2D99 /* HintComment.m */; };
+		4B2E292A2292A073004F2D99 /* ConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E29282292A073004F2D99 /* ConfigInfo.m */; };
+		4B947CA42292A9EF0067F633 /* EShortcutEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CA02292A9EF0067F633 /* EShortcutEntryModel.m */; };
+		4B947CA92292A9F90067F633 /* DetailWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B947CA72292A9F90067F633 /* DetailWindowController.xib */; };
+		4B947CAA2292A9F90067F633 /* DetailWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CA82292A9F90067F633 /* DetailWindowController.m */; };
+		4B947CB02292AA230067F633 /* ESharedUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CAE2292AA230067F633 /* ESharedUserDefault.m */; };
+		4B947CB922939DBD0067F633 /* ConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E29282292A073004F2D99 /* ConfigInfo.m */; };
+		4B947CBA22939F740067F633 /* ESharedUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CAE2292AA230067F633 /* ESharedUserDefault.m */; };
+		4B947CBE2293ABB10067F633 /* BaseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CBD2293ABB10067F633 /* BaseCommand.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4B2E28E822928587004F2D99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B2E28C922928587004F2D99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B2E28D022928587004F2D99;
+			remoteInfo = XCodePlugInDev;
+		};
+		4B2E28F322928587004F2D99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B2E28C922928587004F2D99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B2E28D022928587004F2D99;
+			remoteInfo = XCodePlugInDev;
+		};
+		4B2E2915229285B8004F2D99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B2E28C922928587004F2D99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B2E2907229285B8004F2D99;
+			remoteInfo = EditorExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4B2E291B229285B8004F2D99 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4B2E2917229285B8004F2D99 /* EditorExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4B2E28D122928587004F2D99 /* XCodePlugInDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCodePlugInDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B2E28D422928587004F2D99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4B2E28D522928587004F2D99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4B2E28D722928587004F2D99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4B2E28D822928587004F2D99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4B2E28DA22928587004F2D99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4B2E28DD22928587004F2D99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4B2E28DF22928587004F2D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B2E28E022928587004F2D99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4B2E28E222928587004F2D99 /* XCodePlugInDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCodePlugInDev.entitlements; sourceTree = "<group>"; };
+		4B2E28E722928587004F2D99 /* XCodePlugInDevTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCodePlugInDevTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B2E28EB22928587004F2D99 /* XCodePlugInDevTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCodePlugInDevTests.m; sourceTree = "<group>"; };
+		4B2E28ED22928587004F2D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B2E28F222928587004F2D99 /* XCodePlugInDevUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCodePlugInDevUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B2E28F622928587004F2D99 /* XCodePlugInDevUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCodePlugInDevUITests.m; sourceTree = "<group>"; };
+		4B2E28F822928587004F2D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B2E2908229285B8004F2D99 /* EditorExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EditorExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B2E290A229285B8004F2D99 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4B2E290D229285B8004F2D99 /* SourceEditorExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceEditorExtension.h; sourceTree = "<group>"; };
+		4B2E290E229285B8004F2D99 /* SourceEditorExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceEditorExtension.m; sourceTree = "<group>"; };
+		4B2E2910229285B8004F2D99 /* SourceEditorCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceEditorCommand.h; sourceTree = "<group>"; };
+		4B2E2911229285B8004F2D99 /* SourceEditorCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceEditorCommand.m; sourceTree = "<group>"; };
+		4B2E2913229285B8004F2D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B2E2914229285B8004F2D99 /* EditorExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EditorExtension.entitlements; sourceTree = "<group>"; };
+		4B2E291D229285F1004F2D99 /* ResetImportPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetImportPort.h; sourceTree = "<group>"; };
+		4B2E291E229285F1004F2D99 /* ICommandProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICommandProtocol.h; sourceTree = "<group>"; };
+		4B2E291F229285F1004F2D99 /* ResetImportPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetImportPort.m; sourceTree = "<group>"; };
+		4B2E292522929FA2004F2D99 /* HintComment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HintComment.h; sourceTree = "<group>"; };
+		4B2E292622929FA2004F2D99 /* HintComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HintComment.m; sourceTree = "<group>"; };
+		4B2E29282292A073004F2D99 /* ConfigInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigInfo.m; sourceTree = "<group>"; };
+		4B2E29292292A073004F2D99 /* ConfigInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigInfo.h; sourceTree = "<group>"; };
+		4B947C9E2292A9EF0067F633 /* EShortcutEntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EShortcutEntryModel.h; sourceTree = "<group>"; };
+		4B947CA02292A9EF0067F633 /* EShortcutEntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EShortcutEntryModel.m; sourceTree = "<group>"; };
+		4B947CA62292A9F90067F633 /* DetailWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWindowController.h; sourceTree = "<group>"; };
+		4B947CA72292A9F90067F633 /* DetailWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailWindowController.xib; sourceTree = "<group>"; };
+		4B947CA82292A9F90067F633 /* DetailWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailWindowController.m; sourceTree = "<group>"; };
+		4B947CAC2292AA230067F633 /* ESharedUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESharedUserDefault.h; sourceTree = "<group>"; };
+		4B947CAE2292AA230067F633 /* ESharedUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESharedUserDefault.m; sourceTree = "<group>"; };
+		4B947CB22292AA2C0067F633 /* OCMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMapping.h; sourceTree = "<group>"; };
+		4B947CBC2293ABB10067F633 /* BaseCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCommand.h; sourceTree = "<group>"; };
+		4B947CBD2293ABB10067F633 /* BaseCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCommand.m; sourceTree = "<group>"; };
+		4B947CBF2293AC000067F633 /* IBaseCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBaseCommand.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4B2E28CE22928587004F2D99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E28E422928587004F2D99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E28EF22928587004F2D99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E2905229285B8004F2D99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B2E290B229285B8004F2D99 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4B2E28C822928587004F2D99 = {
+			isa = PBXGroup;
+			children = (
+				4B2E28D322928587004F2D99 /* XCodePlugInDev */,
+				4B2E28EA22928587004F2D99 /* XCodePlugInDevTests */,
+				4B2E28F522928587004F2D99 /* XCodePlugInDevUITests */,
+				4B2E290C229285B8004F2D99 /* EditorExtension */,
+				4B2E2909229285B8004F2D99 /* Frameworks */,
+				4B2E28D222928587004F2D99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4B2E28D222928587004F2D99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E28D122928587004F2D99 /* XCodePlugInDev.app */,
+				4B2E28E722928587004F2D99 /* XCodePlugInDevTests.xctest */,
+				4B2E28F222928587004F2D99 /* XCodePlugInDevUITests.xctest */,
+				4B2E2908229285B8004F2D99 /* EditorExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B2E28D322928587004F2D99 /* XCodePlugInDev */ = {
+			isa = PBXGroup;
+			children = (
+				4B947C9D2292A9DF0067F633 /* HintComment */,
+				4B2E28D422928587004F2D99 /* AppDelegate.h */,
+				4B2E28D522928587004F2D99 /* AppDelegate.m */,
+				4B2E28D722928587004F2D99 /* ViewController.h */,
+				4B2E28D822928587004F2D99 /* ViewController.m */,
+				4B2E28DA22928587004F2D99 /* Assets.xcassets */,
+				4B2E28DC22928587004F2D99 /* Main.storyboard */,
+				4B2E28DF22928587004F2D99 /* Info.plist */,
+				4B2E28E022928587004F2D99 /* main.m */,
+				4B2E28E222928587004F2D99 /* XCodePlugInDev.entitlements */,
+			);
+			path = XCodePlugInDev;
+			sourceTree = "<group>";
+		};
+		4B2E28EA22928587004F2D99 /* XCodePlugInDevTests */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E28EB22928587004F2D99 /* XCodePlugInDevTests.m */,
+				4B2E28ED22928587004F2D99 /* Info.plist */,
+			);
+			path = XCodePlugInDevTests;
+			sourceTree = "<group>";
+		};
+		4B2E28F522928587004F2D99 /* XCodePlugInDevUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E28F622928587004F2D99 /* XCodePlugInDevUITests.m */,
+				4B2E28F822928587004F2D99 /* Info.plist */,
+			);
+			path = XCodePlugInDevUITests;
+			sourceTree = "<group>";
+		};
+		4B2E2909229285B8004F2D99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E290A229285B8004F2D99 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4B2E290C229285B8004F2D99 /* EditorExtension */ = {
+			isa = PBXGroup;
+			children = (
+				4B947CBB2293AB9F0067F633 /* BaseCommand */,
+				4B2E292122928B65004F2D99 /* HintComment */,
+				4B2E291C229285E4004F2D99 /* ResetImportPort */,
+				4B2E290D229285B8004F2D99 /* SourceEditorExtension.h */,
+				4B2E290E229285B8004F2D99 /* SourceEditorExtension.m */,
+				4B2E2910229285B8004F2D99 /* SourceEditorCommand.h */,
+				4B2E2911229285B8004F2D99 /* SourceEditorCommand.m */,
+				4B2E2913229285B8004F2D99 /* Info.plist */,
+				4B2E2914229285B8004F2D99 /* EditorExtension.entitlements */,
+			);
+			path = EditorExtension;
+			sourceTree = "<group>";
+		};
+		4B2E291C229285E4004F2D99 /* ResetImportPort */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E291D229285F1004F2D99 /* ResetImportPort.h */,
+				4B2E291F229285F1004F2D99 /* ResetImportPort.m */,
+			);
+			path = ResetImportPort;
+			sourceTree = "<group>";
+		};
+		4B2E292122928B65004F2D99 /* HintComment */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E292522929FA2004F2D99 /* HintComment.h */,
+				4B2E292622929FA2004F2D99 /* HintComment.m */,
+				4B947CB22292AA2C0067F633 /* OCMapping.h */,
+				4B2E29292292A073004F2D99 /* ConfigInfo.h */,
+				4B2E29282292A073004F2D99 /* ConfigInfo.m */,
+				4B947CAC2292AA230067F633 /* ESharedUserDefault.h */,
+				4B947CAE2292AA230067F633 /* ESharedUserDefault.m */,
+			);
+			path = HintComment;
+			sourceTree = "<group>";
+		};
+		4B947C9D2292A9DF0067F633 /* HintComment */ = {
+			isa = PBXGroup;
+			children = (
+				4B947C9E2292A9EF0067F633 /* EShortcutEntryModel.h */,
+				4B947CA02292A9EF0067F633 /* EShortcutEntryModel.m */,
+				4B947CA62292A9F90067F633 /* DetailWindowController.h */,
+				4B947CA82292A9F90067F633 /* DetailWindowController.m */,
+				4B947CA72292A9F90067F633 /* DetailWindowController.xib */,
+			);
+			path = HintComment;
+			sourceTree = "<group>";
+		};
+		4B947CBB2293AB9F0067F633 /* BaseCommand */ = {
+			isa = PBXGroup;
+			children = (
+				4B2E291E229285F1004F2D99 /* ICommandProtocol.h */,
+				4B947CBF2293AC000067F633 /* IBaseCommand.h */,
+				4B947CBC2293ABB10067F633 /* BaseCommand.h */,
+				4B947CBD2293ABB10067F633 /* BaseCommand.m */,
+			);
+			path = BaseCommand;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4B2E28D022928587004F2D99 /* XCodePlugInDev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B2E28FB22928587004F2D99 /* Build configuration list for PBXNativeTarget "XCodePlugInDev" */;
+			buildPhases = (
+				4B2E28CD22928587004F2D99 /* Sources */,
+				4B2E28CE22928587004F2D99 /* Frameworks */,
+				4B2E28CF22928587004F2D99 /* Resources */,
+				4B2E291B229285B8004F2D99 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B2E2916229285B8004F2D99 /* PBXTargetDependency */,
+			);
+			name = XCodePlugInDev;
+			productName = XCodePlugInDev;
+			productReference = 4B2E28D122928587004F2D99 /* XCodePlugInDev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4B2E28E622928587004F2D99 /* XCodePlugInDevTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B2E28FE22928587004F2D99 /* Build configuration list for PBXNativeTarget "XCodePlugInDevTests" */;
+			buildPhases = (
+				4B2E28E322928587004F2D99 /* Sources */,
+				4B2E28E422928587004F2D99 /* Frameworks */,
+				4B2E28E522928587004F2D99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B2E28E922928587004F2D99 /* PBXTargetDependency */,
+			);
+			name = XCodePlugInDevTests;
+			productName = XCodePlugInDevTests;
+			productReference = 4B2E28E722928587004F2D99 /* XCodePlugInDevTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4B2E28F122928587004F2D99 /* XCodePlugInDevUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B2E290122928587004F2D99 /* Build configuration list for PBXNativeTarget "XCodePlugInDevUITests" */;
+			buildPhases = (
+				4B2E28EE22928587004F2D99 /* Sources */,
+				4B2E28EF22928587004F2D99 /* Frameworks */,
+				4B2E28F022928587004F2D99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B2E28F422928587004F2D99 /* PBXTargetDependency */,
+			);
+			name = XCodePlugInDevUITests;
+			productName = XCodePlugInDevUITests;
+			productReference = 4B2E28F222928587004F2D99 /* XCodePlugInDevUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		4B2E2907229285B8004F2D99 /* EditorExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B2E2918229285B8004F2D99 /* Build configuration list for PBXNativeTarget "EditorExtension" */;
+			buildPhases = (
+				4B2E2904229285B8004F2D99 /* Sources */,
+				4B2E2905229285B8004F2D99 /* Frameworks */,
+				4B2E2906229285B8004F2D99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EditorExtension;
+			productName = EditorExtension;
+			productReference = 4B2E2908229285B8004F2D99 /* EditorExtension.appex */;
+			productType = "com.apple.product-type.xcode-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4B2E28C922928587004F2D99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = wupeng;
+				TargetAttributes = {
+					4B2E28D022928587004F2D99 = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					4B2E28E622928587004F2D99 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 4B2E28D022928587004F2D99;
+					};
+					4B2E28F122928587004F2D99 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 4B2E28D022928587004F2D99;
+					};
+					4B2E2907229285B8004F2D99 = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 4B2E28CC22928587004F2D99 /* Build configuration list for PBXProject "XCodePlugInDev" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4B2E28C822928587004F2D99;
+			productRefGroup = 4B2E28D222928587004F2D99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4B2E28D022928587004F2D99 /* XCodePlugInDev */,
+				4B2E2907229285B8004F2D99 /* EditorExtension */,
+				4B2E28E622928587004F2D99 /* XCodePlugInDevTests */,
+				4B2E28F122928587004F2D99 /* XCodePlugInDevUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4B2E28CF22928587004F2D99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B2E28DB22928587004F2D99 /* Assets.xcassets in Resources */,
+				4B2E28DE22928587004F2D99 /* Main.storyboard in Resources */,
+				4B947CA92292A9F90067F633 /* DetailWindowController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E28E522928587004F2D99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E28F022928587004F2D99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E2906229285B8004F2D99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B2E28CD22928587004F2D99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B947CB02292AA230067F633 /* ESharedUserDefault.m in Sources */,
+				4B947CB922939DBD0067F633 /* ConfigInfo.m in Sources */,
+				4B2E28D922928587004F2D99 /* ViewController.m in Sources */,
+				4B2E28E122928587004F2D99 /* main.m in Sources */,
+				4B947CAA2292A9F90067F633 /* DetailWindowController.m in Sources */,
+				4B947CA42292A9EF0067F633 /* EShortcutEntryModel.m in Sources */,
+				4B2E28D622928587004F2D99 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E28E322928587004F2D99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B2E28EC22928587004F2D99 /* XCodePlugInDevTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E28EE22928587004F2D99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B2E28F722928587004F2D99 /* XCodePlugInDevUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B2E2904229285B8004F2D99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B947CBE2293ABB10067F633 /* BaseCommand.m in Sources */,
+				4B2E292A2292A073004F2D99 /* ConfigInfo.m in Sources */,
+				4B947CBA22939F740067F633 /* ESharedUserDefault.m in Sources */,
+				4B2E2920229285F1004F2D99 /* ResetImportPort.m in Sources */,
+				4B2E290F229285B8004F2D99 /* SourceEditorExtension.m in Sources */,
+				4B2E292722929FA2004F2D99 /* HintComment.m in Sources */,
+				4B2E2912229285B8004F2D99 /* SourceEditorCommand.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4B2E28E922928587004F2D99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B2E28D022928587004F2D99 /* XCodePlugInDev */;
+			targetProxy = 4B2E28E822928587004F2D99 /* PBXContainerItemProxy */;
+		};
+		4B2E28F422928587004F2D99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B2E28D022928587004F2D99 /* XCodePlugInDev */;
+			targetProxy = 4B2E28F322928587004F2D99 /* PBXContainerItemProxy */;
+		};
+		4B2E2916229285B8004F2D99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B2E2907229285B8004F2D99 /* EditorExtension */;
+			targetProxy = 4B2E2915229285B8004F2D99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4B2E28DC22928587004F2D99 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B2E28DD22928587004F2D99 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4B2E28F922928587004F2D99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4B2E28FA22928587004F2D99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4B2E28FC22928587004F2D99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XCodePlugInDev/XCodePlugInDev.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = XCodePlugInDev/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4B2E28FD22928587004F2D99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XCodePlugInDev/XCodePlugInDev.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = XCodePlugInDev/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4B2E28FF22928587004F2D99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = XCodePlugInDevTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDevTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XCodePlugInDev.app/Contents/MacOS/XCodePlugInDev";
+			};
+			name = Debug;
+		};
+		4B2E290022928587004F2D99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = XCodePlugInDevTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDevTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XCodePlugInDev.app/Contents/MacOS/XCodePlugInDev";
+			};
+			name = Release;
+		};
+		4B2E290222928587004F2D99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = XCodePlugInDevUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDevUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = XCodePlugInDev;
+			};
+			name = Debug;
+		};
+		4B2E290322928587004F2D99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = XCodePlugInDevUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDevUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = XCodePlugInDev;
+			};
+			name = Release;
+		};
+		4B2E2919229285B8004F2D99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = EditorExtension/EditorExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = EditorExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev.EditorExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4B2E291A229285B8004F2D99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = EditorExtension/EditorExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = EditorExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev.EditorExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4B2E28CC22928587004F2D99 /* Build configuration list for PBXProject "XCodePlugInDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B2E28F922928587004F2D99 /* Debug */,
+				4B2E28FA22928587004F2D99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B2E28FB22928587004F2D99 /* Build configuration list for PBXNativeTarget "XCodePlugInDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B2E28FC22928587004F2D99 /* Debug */,
+				4B2E28FD22928587004F2D99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B2E28FE22928587004F2D99 /* Build configuration list for PBXNativeTarget "XCodePlugInDevTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B2E28FF22928587004F2D99 /* Debug */,
+				4B2E290022928587004F2D99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B2E290122928587004F2D99 /* Build configuration list for PBXNativeTarget "XCodePlugInDevUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B2E290222928587004F2D99 /* Debug */,
+				4B2E290322928587004F2D99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B2E2918229285B8004F2D99 /* Build configuration list for PBXNativeTarget "EditorExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B2E2919229285B8004F2D99 /* Debug */,
+				4B2E291A229285B8004F2D99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4B2E28C922928587004F2D99 /* Project object */;
+}
