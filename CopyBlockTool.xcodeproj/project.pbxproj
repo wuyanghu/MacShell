@@ -1,0 +1,696 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B31F42822954EF1005D88DB /* rm.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4B31F42722954EF1005D88DB /* rm.sh */; };
+		4B31F42B22955F2D005D88DB /* TaskHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F42A22955F2D005D88DB /* TaskHelp.m */; };
+		4B31F42F229567FF005D88DB /* TaskCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F42E229567FF005D88DB /* TaskCommand.m */; };
+		4B31F4322295686C005D88DB /* ClearCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F4312295686C005D88DB /* ClearCommand.m */; };
+		4B31F4352295697C005D88DB /* UnzipCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F4342295697C005D88DB /* UnzipCommand.m */; };
+		4B31F43822956CBA005D88DB /* CpCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B31F43722956CBA005D88DB /* CpCommand.m */; };
+		4B9887682294DEFC00E3D1F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9887672294DEFC00E3D1F4 /* AppDelegate.m */; };
+		4B98876B2294DEFC00E3D1F4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98876A2294DEFC00E3D1F4 /* ViewController.m */; };
+		4B98876D2294DEFC00E3D1F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B98876C2294DEFC00E3D1F4 /* Assets.xcassets */; };
+		4B9887702294DEFC00E3D1F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B98876E2294DEFC00E3D1F4 /* Main.storyboard */; };
+		4B9887732294DEFC00E3D1F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9887722294DEFC00E3D1F4 /* main.m */; };
+		4B98877E2294DEFC00E3D1F4 /* CopyBlockToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98877D2294DEFC00E3D1F4 /* CopyBlockToolTests.m */; };
+		4B9887892294DEFD00E3D1F4 /* CopyBlockToolUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9887882294DEFD00E3D1F4 /* CopyBlockToolUITests.m */; };
+		4B9887992294E0E700E3D1F4 /* DragInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9887972294E0E700E3D1F4 /* DragInView.m */; };
+		4B9888022294EEAF00E3D1F4 /* unzip.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4B9888012294EEAF00E3D1F4 /* unzip.sh */; };
+		4B98880D2294F0D200E3D1F4 /* FileCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98880C2294F0D200E3D1F4 /* FileCacheManager.m */; };
+		4BAE29012295220700393F39 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAE29002295220700393F39 /* XMLDictionary.m */; };
+		4BAE290422952A9F00393F39 /* TitleTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAE290322952A9F00393F39 /* TitleTableCellView.m */; };
+		4BAE290622952B2800393F39 /* TitleTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAE290522952B2800393F39 /* TitleTableCellView.xib */; };
+		4BAE29082295374200393F39 /* cp.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4BAE29072295374200393F39 /* cp.sh */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4B98877A2294DEFC00E3D1F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B98875B2294DEFC00E3D1F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B9887622294DEFC00E3D1F4;
+			remoteInfo = CopyBlockTool;
+		};
+		4B9887852294DEFD00E3D1F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B98875B2294DEFC00E3D1F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B9887622294DEFC00E3D1F4;
+			remoteInfo = CopyBlockTool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4B31F42722954EF1005D88DB /* rm.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = rm.sh; sourceTree = "<group>"; };
+		4B31F42922955F2D005D88DB /* TaskHelp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskHelp.h; sourceTree = "<group>"; };
+		4B31F42A22955F2D005D88DB /* TaskHelp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskHelp.m; sourceTree = "<group>"; };
+		4B31F42D229567FF005D88DB /* TaskCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskCommand.h; sourceTree = "<group>"; };
+		4B31F42E229567FF005D88DB /* TaskCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskCommand.m; sourceTree = "<group>"; };
+		4B31F4302295686C005D88DB /* ClearCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClearCommand.h; sourceTree = "<group>"; };
+		4B31F4312295686C005D88DB /* ClearCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClearCommand.m; sourceTree = "<group>"; };
+		4B31F4332295697C005D88DB /* UnzipCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnzipCommand.h; sourceTree = "<group>"; };
+		4B31F4342295697C005D88DB /* UnzipCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnzipCommand.m; sourceTree = "<group>"; };
+		4B31F43622956CBA005D88DB /* CpCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpCommand.h; sourceTree = "<group>"; };
+		4B31F43722956CBA005D88DB /* CpCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpCommand.m; sourceTree = "<group>"; };
+		4B9887632294DEFC00E3D1F4 /* CopyBlockTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyBlockTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B9887662294DEFC00E3D1F4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4B9887672294DEFC00E3D1F4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4B9887692294DEFC00E3D1F4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4B98876A2294DEFC00E3D1F4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4B98876C2294DEFC00E3D1F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4B98876F2294DEFC00E3D1F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4B9887712294DEFC00E3D1F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B9887722294DEFC00E3D1F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4B9887742294DEFC00E3D1F4 /* CopyBlockTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CopyBlockTool.entitlements; sourceTree = "<group>"; };
+		4B9887792294DEFC00E3D1F4 /* CopyBlockToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CopyBlockToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B98877D2294DEFC00E3D1F4 /* CopyBlockToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CopyBlockToolTests.m; sourceTree = "<group>"; };
+		4B98877F2294DEFC00E3D1F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B9887842294DEFD00E3D1F4 /* CopyBlockToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CopyBlockToolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B9887882294DEFD00E3D1F4 /* CopyBlockToolUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CopyBlockToolUITests.m; sourceTree = "<group>"; };
+		4B98878A2294DEFD00E3D1F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B9887972294E0E700E3D1F4 /* DragInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragInView.m; sourceTree = "<group>"; };
+		4B9887982294E0E700E3D1F4 /* DragInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragInView.h; sourceTree = "<group>"; };
+		4B9888012294EEAF00E3D1F4 /* unzip.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = unzip.sh; sourceTree = "<group>"; };
+		4B98880B2294F0D200E3D1F4 /* FileCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCacheManager.h; sourceTree = "<group>"; };
+		4B98880C2294F0D200E3D1F4 /* FileCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCacheManager.m; sourceTree = "<group>"; };
+		4BAE28FF2295220600393F39 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		4BAE29002295220700393F39 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		4BAE290222952A9F00393F39 /* TitleTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleTableCellView.h; sourceTree = "<group>"; };
+		4BAE290322952A9F00393F39 /* TitleTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleTableCellView.m; sourceTree = "<group>"; };
+		4BAE290522952B2800393F39 /* TitleTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableCellView.xib; sourceTree = "<group>"; };
+		4BAE29072295374200393F39 /* cp.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = cp.sh; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4B9887602294DEFC00E3D1F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B9887762294DEFC00E3D1F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B9887812294DEFC00E3D1F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4B31F42C229567D4005D88DB /* TaskCommand */ = {
+			isa = PBXGroup;
+			children = (
+				4B31F42D229567FF005D88DB /* TaskCommand.h */,
+				4B31F42E229567FF005D88DB /* TaskCommand.m */,
+				4B31F4302295686C005D88DB /* ClearCommand.h */,
+				4B31F4312295686C005D88DB /* ClearCommand.m */,
+				4B31F4332295697C005D88DB /* UnzipCommand.h */,
+				4B31F4342295697C005D88DB /* UnzipCommand.m */,
+				4B31F43622956CBA005D88DB /* CpCommand.h */,
+				4B31F43722956CBA005D88DB /* CpCommand.m */,
+			);
+			path = TaskCommand;
+			sourceTree = "<group>";
+		};
+		4B98875A2294DEFC00E3D1F4 = {
+			isa = PBXGroup;
+			children = (
+				4B9887652294DEFC00E3D1F4 /* CopyBlockTool */,
+				4B98877C2294DEFC00E3D1F4 /* CopyBlockToolTests */,
+				4B9887872294DEFD00E3D1F4 /* CopyBlockToolUITests */,
+				4B9887642294DEFC00E3D1F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4B9887642294DEFC00E3D1F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B9887632294DEFC00E3D1F4 /* CopyBlockTool.app */,
+				4B9887792294DEFC00E3D1F4 /* CopyBlockToolTests.xctest */,
+				4B9887842294DEFD00E3D1F4 /* CopyBlockToolUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B9887652294DEFC00E3D1F4 /* CopyBlockTool */ = {
+			isa = PBXGroup;
+			children = (
+				4B31F42C229567D4005D88DB /* TaskCommand */,
+				4BAE28FE229521FF00393F39 /* XMLParse */,
+				4B98880A2294F0CB00E3D1F4 /* FileCache */,
+				4B9888032294EF6200E3D1F4 /* NSTask */,
+				4B9888002294EC5700E3D1F4 /* Shell */,
+				4B9887962294E0DE00E3D1F4 /* View */,
+				4B9887662294DEFC00E3D1F4 /* AppDelegate.h */,
+				4B9887672294DEFC00E3D1F4 /* AppDelegate.m */,
+				4B9887692294DEFC00E3D1F4 /* ViewController.h */,
+				4B98876A2294DEFC00E3D1F4 /* ViewController.m */,
+				4B98876C2294DEFC00E3D1F4 /* Assets.xcassets */,
+				4B98876E2294DEFC00E3D1F4 /* Main.storyboard */,
+				4B9887712294DEFC00E3D1F4 /* Info.plist */,
+				4B9887722294DEFC00E3D1F4 /* main.m */,
+				4B9887742294DEFC00E3D1F4 /* CopyBlockTool.entitlements */,
+			);
+			path = CopyBlockTool;
+			sourceTree = "<group>";
+		};
+		4B98877C2294DEFC00E3D1F4 /* CopyBlockToolTests */ = {
+			isa = PBXGroup;
+			children = (
+				4B98877D2294DEFC00E3D1F4 /* CopyBlockToolTests.m */,
+				4B98877F2294DEFC00E3D1F4 /* Info.plist */,
+			);
+			path = CopyBlockToolTests;
+			sourceTree = "<group>";
+		};
+		4B9887872294DEFD00E3D1F4 /* CopyBlockToolUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4B9887882294DEFD00E3D1F4 /* CopyBlockToolUITests.m */,
+				4B98878A2294DEFD00E3D1F4 /* Info.plist */,
+			);
+			path = CopyBlockToolUITests;
+			sourceTree = "<group>";
+		};
+		4B9887962294E0DE00E3D1F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4B9887982294E0E700E3D1F4 /* DragInView.h */,
+				4B9887972294E0E700E3D1F4 /* DragInView.m */,
+				4BAE290222952A9F00393F39 /* TitleTableCellView.h */,
+				4BAE290322952A9F00393F39 /* TitleTableCellView.m */,
+				4BAE290522952B2800393F39 /* TitleTableCellView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4B9888002294EC5700E3D1F4 /* Shell */ = {
+			isa = PBXGroup;
+			children = (
+				4B9888012294EEAF00E3D1F4 /* unzip.sh */,
+				4BAE29072295374200393F39 /* cp.sh */,
+				4B31F42722954EF1005D88DB /* rm.sh */,
+			);
+			path = Shell;
+			sourceTree = "<group>";
+		};
+		4B9888032294EF6200E3D1F4 /* NSTask */ = {
+			isa = PBXGroup;
+			children = (
+				4B31F42922955F2D005D88DB /* TaskHelp.h */,
+				4B31F42A22955F2D005D88DB /* TaskHelp.m */,
+			);
+			path = NSTask;
+			sourceTree = "<group>";
+		};
+		4B98880A2294F0CB00E3D1F4 /* FileCache */ = {
+			isa = PBXGroup;
+			children = (
+				4B98880B2294F0D200E3D1F4 /* FileCacheManager.h */,
+				4B98880C2294F0D200E3D1F4 /* FileCacheManager.m */,
+			);
+			path = FileCache;
+			sourceTree = "<group>";
+		};
+		4BAE28FE229521FF00393F39 /* XMLParse */ = {
+			isa = PBXGroup;
+			children = (
+				4BAE28FF2295220600393F39 /* XMLDictionary.h */,
+				4BAE29002295220700393F39 /* XMLDictionary.m */,
+			);
+			path = XMLParse;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4B9887622294DEFC00E3D1F4 /* CopyBlockTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B98878D2294DEFD00E3D1F4 /* Build configuration list for PBXNativeTarget "CopyBlockTool" */;
+			buildPhases = (
+				4B98875F2294DEFC00E3D1F4 /* Sources */,
+				4B9887602294DEFC00E3D1F4 /* Frameworks */,
+				4B9887612294DEFC00E3D1F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CopyBlockTool;
+			productName = CopyBlockTool;
+			productReference = 4B9887632294DEFC00E3D1F4 /* CopyBlockTool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4B9887782294DEFC00E3D1F4 /* CopyBlockToolTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B9887902294DEFD00E3D1F4 /* Build configuration list for PBXNativeTarget "CopyBlockToolTests" */;
+			buildPhases = (
+				4B9887752294DEFC00E3D1F4 /* Sources */,
+				4B9887762294DEFC00E3D1F4 /* Frameworks */,
+				4B9887772294DEFC00E3D1F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B98877B2294DEFC00E3D1F4 /* PBXTargetDependency */,
+			);
+			name = CopyBlockToolTests;
+			productName = CopyBlockToolTests;
+			productReference = 4B9887792294DEFC00E3D1F4 /* CopyBlockToolTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4B9887832294DEFC00E3D1F4 /* CopyBlockToolUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B9887932294DEFD00E3D1F4 /* Build configuration list for PBXNativeTarget "CopyBlockToolUITests" */;
+			buildPhases = (
+				4B9887802294DEFC00E3D1F4 /* Sources */,
+				4B9887812294DEFC00E3D1F4 /* Frameworks */,
+				4B9887822294DEFC00E3D1F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B9887862294DEFD00E3D1F4 /* PBXTargetDependency */,
+			);
+			name = CopyBlockToolUITests;
+			productName = CopyBlockToolUITests;
+			productReference = 4B9887842294DEFD00E3D1F4 /* CopyBlockToolUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4B98875B2294DEFC00E3D1F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = wupeng;
+				TargetAttributes = {
+					4B9887622294DEFC00E3D1F4 = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					4B9887782294DEFC00E3D1F4 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 4B9887622294DEFC00E3D1F4;
+					};
+					4B9887832294DEFC00E3D1F4 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 4B9887622294DEFC00E3D1F4;
+					};
+				};
+			};
+			buildConfigurationList = 4B98875E2294DEFC00E3D1F4 /* Build configuration list for PBXProject "CopyBlockTool" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4B98875A2294DEFC00E3D1F4;
+			productRefGroup = 4B9887642294DEFC00E3D1F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4B9887622294DEFC00E3D1F4 /* CopyBlockTool */,
+				4B9887782294DEFC00E3D1F4 /* CopyBlockToolTests */,
+				4B9887832294DEFC00E3D1F4 /* CopyBlockToolUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4B9887612294DEFC00E3D1F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B9888022294EEAF00E3D1F4 /* unzip.sh in Resources */,
+				4B98876D2294DEFC00E3D1F4 /* Assets.xcassets in Resources */,
+				4B9887702294DEFC00E3D1F4 /* Main.storyboard in Resources */,
+				4B31F42822954EF1005D88DB /* rm.sh in Resources */,
+				4BAE290622952B2800393F39 /* TitleTableCellView.xib in Resources */,
+				4BAE29082295374200393F39 /* cp.sh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B9887772294DEFC00E3D1F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B9887822294DEFC00E3D1F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B98875F2294DEFC00E3D1F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BAE29012295220700393F39 /* XMLDictionary.m in Sources */,
+				4B98880D2294F0D200E3D1F4 /* FileCacheManager.m in Sources */,
+				4B98876B2294DEFC00E3D1F4 /* ViewController.m in Sources */,
+				4B31F4322295686C005D88DB /* ClearCommand.m in Sources */,
+				4B31F4352295697C005D88DB /* UnzipCommand.m in Sources */,
+				4B31F42F229567FF005D88DB /* TaskCommand.m in Sources */,
+				4B9887732294DEFC00E3D1F4 /* main.m in Sources */,
+				4BAE290422952A9F00393F39 /* TitleTableCellView.m in Sources */,
+				4B31F43822956CBA005D88DB /* CpCommand.m in Sources */,
+				4B31F42B22955F2D005D88DB /* TaskHelp.m in Sources */,
+				4B9887682294DEFC00E3D1F4 /* AppDelegate.m in Sources */,
+				4B9887992294E0E700E3D1F4 /* DragInView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B9887752294DEFC00E3D1F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B98877E2294DEFC00E3D1F4 /* CopyBlockToolTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B9887802294DEFC00E3D1F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B9887892294DEFD00E3D1F4 /* CopyBlockToolUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4B98877B2294DEFC00E3D1F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B9887622294DEFC00E3D1F4 /* CopyBlockTool */;
+			targetProxy = 4B98877A2294DEFC00E3D1F4 /* PBXContainerItemProxy */;
+		};
+		4B9887862294DEFD00E3D1F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B9887622294DEFC00E3D1F4 /* CopyBlockTool */;
+			targetProxy = 4B9887852294DEFD00E3D1F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4B98876E2294DEFC00E3D1F4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B98876F2294DEFC00E3D1F4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4B98878B2294DEFD00E3D1F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4B98878C2294DEFD00E3D1F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4B98878E2294DEFD00E3D1F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = CopyBlockTool/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.CopyBlockTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4B98878F2294DEFD00E3D1F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = CopyBlockTool/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.CopyBlockTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4B9887912294DEFD00E3D1F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = CopyBlockToolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.CopyBlockToolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CopyBlockTool.app/Contents/MacOS/CopyBlockTool";
+			};
+			name = Debug;
+		};
+		4B9887922294DEFD00E3D1F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = CopyBlockToolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.CopyBlockToolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CopyBlockTool.app/Contents/MacOS/CopyBlockTool";
+			};
+			name = Release;
+		};
+		4B9887942294DEFD00E3D1F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = CopyBlockToolUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.CopyBlockToolUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CopyBlockTool;
+			};
+			name = Debug;
+		};
+		4B9887952294DEFD00E3D1F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N76D3WSK95;
+				INFOPLIST_FILE = CopyBlockToolUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.CopyBlockToolUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CopyBlockTool;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4B98875E2294DEFC00E3D1F4 /* Build configuration list for PBXProject "CopyBlockTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B98878B2294DEFD00E3D1F4 /* Debug */,
+				4B98878C2294DEFD00E3D1F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B98878D2294DEFD00E3D1F4 /* Build configuration list for PBXNativeTarget "CopyBlockTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B98878E2294DEFD00E3D1F4 /* Debug */,
+				4B98878F2294DEFD00E3D1F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B9887902294DEFD00E3D1F4 /* Build configuration list for PBXNativeTarget "CopyBlockToolTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B9887912294DEFD00E3D1F4 /* Debug */,
+				4B9887922294DEFD00E3D1F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B9887932294DEFD00E3D1F4 /* Build configuration list for PBXNativeTarget "CopyBlockToolUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B9887942294DEFD00E3D1F4 /* Debug */,
+				4B9887952294DEFD00E3D1F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4B98875B2294DEFC00E3D1F4 /* Project object */;
+}
