@@ -1,7 +1,5 @@
 #!/bin/bash
 #coding=utf-8
-basepath=$(cd `dirname $0`; pwd)
-source $basepath/rm.sh $1
 
 original_path=$1/.
 target_path=/Users/$USER/Library/Developer/Xcode/UserData/CodeSnippets
@@ -20,4 +18,3 @@ function cpOriginalToTarget()
 
 createFileNoExist
 cpOriginalToTarget
-rmAllFile $1

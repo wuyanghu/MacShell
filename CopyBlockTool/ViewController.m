@@ -16,6 +16,10 @@
 #import "CpCommand.h"
 
 @interface ViewController()<DragInViewDelegate,NSTableViewDataSource,NSTableViewDelegate>
+{
+    TaskCommand * _cpTask;
+    TaskCommand * _clearTask;
+}
 @property (weak) IBOutlet DragInView *dragInView;
 @property (weak) IBOutlet NSTableView *tableView;
 
@@ -29,6 +33,8 @@
 - (instancetype)initWithCoder:(NSCoder *)coder{
     self = [super initWithCoder:coder];
     if (self) {
+        _cpTask = [CpCommand new];
+        _clearTask = [ClearCommand new];
         _tableViewDatas = [self getTitlesFromFiles];
     }
     return self;
@@ -72,8 +78,8 @@
 }
 
 - (IBAction)updateAction:(id)sender {
-    TaskCommand * cpTask = [CpCommand new];
-    [cpTask executeTask];
+    [_cpTask executeTask];
+    [_clearTask executeTask];
 }
 
 #pragma mark - DragInViewDelegate
@@ -100,8 +106,7 @@
 }
 
 - (void)openZipFile:(NSArray *)pathArr {
-    TaskCommand * clearTask = [ClearCommand new];
-    [clearTask executeTask];
+    [_clearTask executeTask];
     
     TaskCommand * unzipTask = [[UnzipCommand alloc] initWithProjectPath:pathArr.firstObject];
     [unzipTask executeTask];
