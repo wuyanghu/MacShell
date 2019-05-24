@@ -180,7 +180,7 @@
 //光标在变量后面时获取变量
 - (VarNameModel *)getVarNameFromCursor {
     NSString * orignal = _orignalLines[_selection.start.line];
-    NSArray * specialChars = @[@" ",@";",@".",@"\n",@"[",@"]",@":",@"_"];
+    NSArray * specialChars = @[@" ",@";",@".",@"\n",@"[",@"]",@":",@"_",@",",@")"];
     
     NSInteger i;
     for (i = _selection.start.column-1; i>0; i--) {
