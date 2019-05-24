@@ -33,7 +33,7 @@
         return;
     }
     _findVar = [[FindVar alloc] initWithOrignalLines:lines selection:selection];
-    [_findVar findIfCondition];
+    [_findVar findAndReplaceIfCondition];
     
 }
 

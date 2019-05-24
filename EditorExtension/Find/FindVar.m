@@ -8,6 +8,7 @@
 
 #import "FindVar.h"
 #import <XcodeKit/XCSourceTextRange.h>
+#import "VarNameModel.h"
 
 @interface FindVar()
 {
@@ -27,26 +28,32 @@
     return self;
 }
 
-- (void)findIfCondition{
+- (void)findAndReplaceIfCondition{
     if (_selection.start.line != _selection.end.line) {//无论是在变量后面还是选中，起始和结束的行数相同
         return;
     }
-    NSString * varName;
+    VarNameModel * varNameModel;
     if (_selection.start.line == _selection.end.line && _selection.start.column == _selection.end.column){
-        varName = [self getVarNameFromCursorAfter];
+        varNameModel = [self getVarNameFromCursor];
     }else{
-        varName = [self getVarNameFromSelection];
+        varNameModel = [self getVarNameFromSelection];
     }
-    NSString * className = [self getClassNameFromVarName:varName];
-    NSLog(@"varName=%@,className=%@",varName,className);
+    NSString * className = [self getClassNameFromVarName:varNameModel.varName];
+    NSLog(@"prefix=%@,varName=%@,className=%@",varNameModel.prefix,varNameModel.varName,className);
     if (!className) {
         return;
     }
     
+    [self replaceIfConditionPalceHolder:className varNameModel:varNameModel];
+}
+
+#pragma mark - 占位符
+
+- (void)replaceIfConditionPalceHolder:(NSString *)className varNameModel:(VarNameModel *)varNameModel {
     for (NSInteger i = _selection.start.line; i<_orignalLines.count; i++) {
         NSString * orignal = _orignalLines[i];
         if([orignal containsString:@"<#statements#>"]){
-            NSString * replacePlaceHolder = [orignal stringByReplacingOccurrencesOfString:@"<#statements#>" withString:varName];
+            NSString * replacePlaceHolder = [orignal stringByReplacingOccurrencesOfString:@"<#statements#>" withString:varNameModel.getPlaceHolder];
             
             NSString * placeClassName = [self findKindOfClass:replacePlaceHolder];
             if(placeClassName){
@@ -72,7 +79,7 @@
     return nil;
 }
 
-#pragma mark - ++++++++
+#pragma mark - 过滤
 
 - (NSString *)filterSpecialBracket:(NSString *)orignal {
     NSString * leftBracket = [orignal stringByReplacingOccurrencesOfString:@"(" withString:@""];
@@ -86,7 +93,57 @@
     return separated;
 }
 
-#pragma mark - 按字符识别
+#pragma mark - 获取类名
+
+- (NSString *)getClassNameFromProperty:(NSString *)preOrignal {
+    NSInteger i = 0;
+    NSInteger start = 0;
+    NSInteger end = 0;
+    
+    NSArray * leftMappingArr = @[@")"];
+    NSArray * rightMappingArr = @[@"<",@"*"];
+    while (i<preOrignal.length) {
+        NSString * subStr = [preOrignal substringWithRange:NSMakeRange(i, 1)];
+        if ([leftMappingArr containsObject:subStr] ) {
+            start = i+1;
+        }
+        if([rightMappingArr containsObject:subStr]){
+            end = i;
+            break;
+        }
+        i++;
+    }
+    
+    NSString * subStr = [preOrignal substringWithRange:NSMakeRange(start, end-start)];
+    if (subStr.length>0) {
+        subStr = [subStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        return subStr;
+    }
+    return nil;
+}
+
+- (NSString *)getClassNameFromMethodParams:(NSString *)orignal range:(const NSRange *)range varName:(NSString *)varName {
+    for (NSInteger j = range->location-1; j>=0; j--) {
+        
+        NSArray * separatedArray = [self separatedString:orignal separatedSymbol:@":"];
+        for (NSString * separated in separatedArray) {
+            if (![separated containsString:@"-"] && [separated containsString:varName]) {
+                NSString * replaceBr = [self filterSpecialBracket:separated];
+                
+                NSArray * separatedArray = [self separatedString:replaceBr separatedSymbol:@"*="];//第一个是类型；第二个是变量名称
+                NSString * className = separatedArray.firstObject;
+                return className;
+            }
+        }
+    }
+    return nil;
+}
+//类型 * 变量名
+- (NSString *)getClassNameFromNormal:(NSString *)preOrignal {
+    preOrignal = [preOrignal stringByReplacingOccurrencesOfString:@" " withString:@""];
+    preOrignal = [preOrignal stringByReplacingOccurrencesOfString:@"*" withString:@""];
+    return preOrignal;
+}
 
 - (NSString *)getClassNameFromVarName:(NSString *)varName{
     for (NSInteger i = _selection.start.line; i>0; i--) {
@@ -104,61 +161,26 @@
         }
         
         if ([preOrignal containsString:@"-"]) {
-            for (NSInteger j = range.location-1; j>=0; j--) {
-                
-                NSArray * separatedArray = [self separatedString:orignal separatedSymbol:@":"];
-                for (NSString * separated in separatedArray) {
-                    if (![separated containsString:@"-"] && [separated containsString:varName]) {
-                        NSString * replaceBr = [self filterSpecialBracket:separated];
-                        
-                        NSArray * separatedArray = [self separatedString:replaceBr separatedSymbol:@"*="];//第一个是类型；第二个是变量名称
-                        NSString * className = separatedArray.firstObject;
-                        return className;
-                    }
-                }
-            }
-            return nil;
+            return [self getClassNameFromMethodParams:orignal range:&range varName:varName];
         }
         
         if ([preOrignal containsString:@"*"]) {
-            NSInteger i = 0;
-            NSInteger start = 0;
-            NSInteger end = 0;
+            NSString * className = [self getClassNameFromProperty:preOrignal];
+            if(className) return className;
             
-            NSArray * leftMappingArr = @[@")"];
-            NSArray * rightMappingArr = @[@"<",@"*"];
-            while (i<preOrignal.length) {
-                NSString * subStr = [preOrignal substringWithRange:NSMakeRange(i, 1)];
-                if ([leftMappingArr containsObject:subStr] ) {
-                    start = i+1;
-                }
-                if([rightMappingArr containsObject:subStr]){
-                    end = i;
-                    break;
-                }
-                i++;
-            }
-            NSString * subStrartStr = [preOrignal substringWithRange:NSMakeRange(start, 1)];
-            NSString * subEndStr = [preOrignal substringWithRange:NSMakeRange(end, 1)];
-            NSString * subStr = [preOrignal substringWithRange:NSMakeRange(start, end-start)];
-            if (subStr.length>0) {
-                subStr = [subStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-                return subStr;
-            }
-            
-            preOrignal = [preOrignal stringByReplacingOccurrencesOfString:@" " withString:@""];
-            preOrignal = [preOrignal stringByReplacingOccurrencesOfString:@"*" withString:@""];
-            
-            return preOrignal;
+            return [self getClassNameFromNormal:preOrignal];
         }
     }
     return nil;
 }
 
+
+#pragma mark - 获取变量名称
+
 //光标在变量后面时获取变量
-- (NSString *)getVarNameFromCursorAfter {
+- (VarNameModel *)getVarNameFromCursor {
     NSString * orignal = _orignalLines[_selection.start.line];
-    NSArray * specialChars = @[@" ",@";",@".",@"\n",@"[",@"]",@":"];
+    NSArray * specialChars = @[@" ",@";",@".",@"\n",@"[",@"]",@":",@"_"];
     
     NSInteger i;
     for (i = _selection.start.column-1; i>0; i--) {
@@ -176,19 +198,36 @@
             break;
         }
     }
-    NSString * subIStr = [orignal substringWithRange:NSMakeRange(i, 1)];
-    NSString * subJStr = [orignal substringWithRange:NSMakeRange(j, 1)];
-
-    NSString * varName = [orignal substringWithRange:NSMakeRange(i, j-i)];
     
-    NSLog(@"subIStr=%@,subJStr=%@,varName=%@",subIStr,subJStr,varName);
-    return varName;
+    NSString * varName = [orignal substringWithRange:NSMakeRange(i, j-i)];
+    NSString * prefix = [self getPreFixFromVar:orignal varName:varName position:i-1];
+    return [[VarNameModel alloc] initWithVarName:varName prefix:prefix];
 }
 
 //选中变量时获取变量
-- (NSString *)getVarNameFromSelection{
+- (VarNameModel *)getVarNameFromSelection{
     NSString * orignal = _orignalLines[_selection.start.line];
     NSString * varName = [orignal substringWithRange:NSMakeRange(_selection.start.column, _selection.end.column-_selection.start.column)];
-    return varName;
+    NSString * prefix = [self getPreFixFromVar:orignal varName:varName position:_selection.start.column-1];
+    
+    return [[VarNameModel alloc] initWithVarName:varName prefix:prefix];
 }
+
+#pragma mark - 获取变量前缀
+
+- (NSString *)getPreFixFromVar:(NSString *)orignal varName:(NSString *)varName position:(NSInteger)position{
+    NSString * prefix = nil;
+    if ([varName containsString:@"_"]) {
+        prefix = @"_";
+    }else{
+        prefix = [orignal substringWithRange:NSMakeRange(position, 1)];
+        if ([prefix isEqualToString:@" "]) {
+            prefix = @" ";
+        }else if ([prefix isEqualToString:@"."]){
+            prefix = @".";
+        }
+    }
+    return prefix;
+}
+
 @end
