@@ -9,6 +9,7 @@
 #import "SourceEditorCommand.h"
 #import "ResetImportPort.h"
 #import "HintComment.h"
+#import "ReplaceCommand.h"
 
 @implementation SourceEditorCommand
 
@@ -20,6 +21,8 @@
         main = [ResetImportPort new];
     }else if ([invocation.commandIdentifier hasSuffix:@"HintComment"]){
         main = [HintComment new];
+    }else if ([invocation.commandIdentifier hasSuffix:@"replace"]){
+        main = [ReplaceCommand new];
     }
     if (main) {
         [main commandMain:invocation completionHandler:completionHandler];

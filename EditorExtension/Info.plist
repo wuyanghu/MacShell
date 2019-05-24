@@ -44,6 +44,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>HintComment</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>SourceEditorCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).replace</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>replace</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>SourceEditorExtension</string>

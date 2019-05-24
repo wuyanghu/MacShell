@@ -21,6 +21,8 @@
 		4B2E2920229285F1004F2D99 /* ResetImportPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E291F229285F1004F2D99 /* ResetImportPort.m */; };
 		4B2E292722929FA2004F2D99 /* HintComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E292622929FA2004F2D99 /* HintComment.m */; };
 		4B2E292A2292A073004F2D99 /* ConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E29282292A073004F2D99 /* ConfigInfo.m */; };
+		4B3BD10F22963EDA0021B9E3 /* FindVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BD10E22963EDA0021B9E3 /* FindVar.m */; };
+		4B3BD113229642F20021B9E3 /* ReplaceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BD112229642F20021B9E3 /* ReplaceCommand.m */; };
 		4B947CA42292A9EF0067F633 /* EShortcutEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CA02292A9EF0067F633 /* EShortcutEntryModel.m */; };
 		4B947CA92292A9F90067F633 /* DetailWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B947CA72292A9F90067F633 /* DetailWindowController.xib */; };
 		4B947CAA2292A9F90067F633 /* DetailWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CA82292A9F90067F633 /* DetailWindowController.m */; };
@@ -100,6 +102,10 @@
 		4B2E292622929FA2004F2D99 /* HintComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HintComment.m; sourceTree = "<group>"; };
 		4B2E29282292A073004F2D99 /* ConfigInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigInfo.m; sourceTree = "<group>"; };
 		4B2E29292292A073004F2D99 /* ConfigInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigInfo.h; sourceTree = "<group>"; };
+		4B3BD10D22963EDA0021B9E3 /* FindVar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindVar.h; sourceTree = "<group>"; };
+		4B3BD10E22963EDA0021B9E3 /* FindVar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindVar.m; sourceTree = "<group>"; };
+		4B3BD111229642F20021B9E3 /* ReplaceCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplaceCommand.h; sourceTree = "<group>"; };
+		4B3BD112229642F20021B9E3 /* ReplaceCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplaceCommand.m; sourceTree = "<group>"; };
 		4B947C9E2292A9EF0067F633 /* EShortcutEntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EShortcutEntryModel.h; sourceTree = "<group>"; };
 		4B947CA02292A9EF0067F633 /* EShortcutEntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EShortcutEntryModel.m; sourceTree = "<group>"; };
 		4B947CA62292A9F90067F633 /* DetailWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWindowController.h; sourceTree = "<group>"; };
@@ -215,9 +221,11 @@
 		4B2E290C229285B8004F2D99 /* EditorExtension */ = {
 			isa = PBXGroup;
 			children = (
+				4B3BD10922963DF60021B9E3 /* Find */,
 				4B947CBB2293AB9F0067F633 /* BaseCommand */,
 				4B2E292122928B65004F2D99 /* HintComment */,
 				4B2E291C229285E4004F2D99 /* ResetImportPort */,
+				4B3BD110229642D20021B9E3 /* Replace */,
 				4B2E290D229285B8004F2D99 /* SourceEditorExtension.h */,
 				4B2E290E229285B8004F2D99 /* SourceEditorExtension.m */,
 				4B2E2910229285B8004F2D99 /* SourceEditorCommand.h */,
@@ -249,6 +257,24 @@
 				4B947CAE2292AA230067F633 /* ESharedUserDefault.m */,
 			);
 			path = HintComment;
+			sourceTree = "<group>";
+		};
+		4B3BD10922963DF60021B9E3 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				4B3BD10D22963EDA0021B9E3 /* FindVar.h */,
+				4B3BD10E22963EDA0021B9E3 /* FindVar.m */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		4B3BD110229642D20021B9E3 /* Replace */ = {
+			isa = PBXGroup;
+			children = (
+				4B3BD111229642F20021B9E3 /* ReplaceCommand.h */,
+				4B3BD112229642F20021B9E3 /* ReplaceCommand.m */,
+			);
+			path = Replace;
 			sourceTree = "<group>";
 		};
 		4B947C9D2292A9DF0067F633 /* HintComment */ = {
@@ -481,8 +507,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B947CBE2293ABB10067F633 /* BaseCommand.m in Sources */,
+				4B3BD10F22963EDA0021B9E3 /* FindVar.m in Sources */,
 				4B2E292A2292A073004F2D99 /* ConfigInfo.m in Sources */,
 				4B947CBA22939F740067F633 /* ESharedUserDefault.m in Sources */,
+				4B3BD113229642F20021B9E3 /* ReplaceCommand.m in Sources */,
 				4B2E2920229285F1004F2D99 /* ResetImportPort.m in Sources */,
 				4B2E290F229285B8004F2D99 /* SourceEditorExtension.m in Sources */,
 				4B2E292722929FA2004F2D99 /* HintComment.m in Sources */,

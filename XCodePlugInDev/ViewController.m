@@ -68,6 +68,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
