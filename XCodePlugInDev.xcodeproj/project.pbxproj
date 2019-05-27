@@ -21,7 +21,6 @@
 		4B2E2920229285F1004F2D99 /* ResetImportPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E291F229285F1004F2D99 /* ResetImportPort.m */; };
 		4B2E292722929FA2004F2D99 /* HintComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E292622929FA2004F2D99 /* HintComment.m */; };
 		4B2E292A2292A073004F2D99 /* ConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E29282292A073004F2D99 /* ConfigInfo.m */; };
-		4B3BD10F22963EDA0021B9E3 /* FindVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BD10E22963EDA0021B9E3 /* FindVar.m */; };
 		4B3BD113229642F20021B9E3 /* ReplaceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BD112229642F20021B9E3 /* ReplaceCommand.m */; };
 		4B3BD1162297944C0021B9E3 /* VarNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BD1152297944C0021B9E3 /* VarNameModel.m */; };
 		4B947CA42292A9EF0067F633 /* EShortcutEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CA02292A9EF0067F633 /* EShortcutEntryModel.m */; };
@@ -31,6 +30,11 @@
 		4B947CB922939DBD0067F633 /* ConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E29282292A073004F2D99 /* ConfigInfo.m */; };
 		4B947CBA22939F740067F633 /* ESharedUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CAE2292AA230067F633 /* ESharedUserDefault.m */; };
 		4B947CBE2293ABB10067F633 /* BaseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B947CBD2293ABB10067F633 /* BaseCommand.m */; };
+		4BB97CB3229B7E3D00989E3A /* GetVarName.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB97CB2229B7E3D00989E3A /* GetVarName.m */; };
+		4BB97CB6229B7E9600989E3A /* GetVarNameFromCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB97CB5229B7E9600989E3A /* GetVarNameFromCursor.m */; };
+		4BB97CB9229B7F4A00989E3A /* GetVarNameFromSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB97CB8229B7F4A00989E3A /* GetVarNameFromSelection.m */; };
+		4BB97CBD229B876100989E3A /* GetClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB97CBC229B876100989E3A /* GetClassName.m */; };
+		4BB97CC1229B896B00989E3A /* ReplaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB97CC0229B896B00989E3A /* ReplaceHolder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,8 +107,6 @@
 		4B2E292622929FA2004F2D99 /* HintComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HintComment.m; sourceTree = "<group>"; };
 		4B2E29282292A073004F2D99 /* ConfigInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigInfo.m; sourceTree = "<group>"; };
 		4B2E29292292A073004F2D99 /* ConfigInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigInfo.h; sourceTree = "<group>"; };
-		4B3BD10D22963EDA0021B9E3 /* FindVar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindVar.h; sourceTree = "<group>"; };
-		4B3BD10E22963EDA0021B9E3 /* FindVar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindVar.m; sourceTree = "<group>"; };
 		4B3BD111229642F20021B9E3 /* ReplaceCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplaceCommand.h; sourceTree = "<group>"; };
 		4B3BD112229642F20021B9E3 /* ReplaceCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplaceCommand.m; sourceTree = "<group>"; };
 		4B3BD1142297944C0021B9E3 /* VarNameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VarNameModel.h; sourceTree = "<group>"; };
@@ -120,6 +122,16 @@
 		4B947CBC2293ABB10067F633 /* BaseCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCommand.h; sourceTree = "<group>"; };
 		4B947CBD2293ABB10067F633 /* BaseCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCommand.m; sourceTree = "<group>"; };
 		4B947CBF2293AC000067F633 /* IBaseCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBaseCommand.h; sourceTree = "<group>"; };
+		4BB97CB1229B7E3D00989E3A /* GetVarName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetVarName.h; sourceTree = "<group>"; };
+		4BB97CB2229B7E3D00989E3A /* GetVarName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetVarName.m; sourceTree = "<group>"; };
+		4BB97CB4229B7E9600989E3A /* GetVarNameFromCursor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetVarNameFromCursor.h; sourceTree = "<group>"; };
+		4BB97CB5229B7E9600989E3A /* GetVarNameFromCursor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetVarNameFromCursor.m; sourceTree = "<group>"; };
+		4BB97CB7229B7F4A00989E3A /* GetVarNameFromSelection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetVarNameFromSelection.h; sourceTree = "<group>"; };
+		4BB97CB8229B7F4A00989E3A /* GetVarNameFromSelection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetVarNameFromSelection.m; sourceTree = "<group>"; };
+		4BB97CBB229B876100989E3A /* GetClassName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetClassName.h; sourceTree = "<group>"; };
+		4BB97CBC229B876100989E3A /* GetClassName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetClassName.m; sourceTree = "<group>"; };
+		4BB97CBF229B896B00989E3A /* ReplaceHolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplaceHolder.h; sourceTree = "<group>"; };
+		4BB97CC0229B896B00989E3A /* ReplaceHolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplaceHolder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,7 +236,6 @@
 		4B2E290C229285B8004F2D99 /* EditorExtension */ = {
 			isa = PBXGroup;
 			children = (
-				4B3BD10922963DF60021B9E3 /* Find */,
 				4B947CBB2293AB9F0067F633 /* BaseCommand */,
 				4B2E292122928B65004F2D99 /* HintComment */,
 				4B2E291C229285E4004F2D99 /* ResetImportPort */,
@@ -265,8 +276,9 @@
 		4B3BD10922963DF60021B9E3 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				4B3BD10D22963EDA0021B9E3 /* FindVar.h */,
-				4B3BD10E22963EDA0021B9E3 /* FindVar.m */,
+				4BB97CBE229B88FC00989E3A /* ReplaceHolder */,
+				4BB97CBA229B874400989E3A /* GetClassName */,
+				4BB97CB0229B7E2200989E3A /* GetVarName */,
 				4B3BD1142297944C0021B9E3 /* VarNameModel.h */,
 				4B3BD1152297944C0021B9E3 /* VarNameModel.m */,
 			);
@@ -276,6 +288,7 @@
 		4B3BD110229642D20021B9E3 /* Replace */ = {
 			isa = PBXGroup;
 			children = (
+				4B3BD10922963DF60021B9E3 /* Find */,
 				4B3BD111229642F20021B9E3 /* ReplaceCommand.h */,
 				4B3BD112229642F20021B9E3 /* ReplaceCommand.m */,
 			);
@@ -303,6 +316,37 @@
 				4B947CBD2293ABB10067F633 /* BaseCommand.m */,
 			);
 			path = BaseCommand;
+			sourceTree = "<group>";
+		};
+		4BB97CB0229B7E2200989E3A /* GetVarName */ = {
+			isa = PBXGroup;
+			children = (
+				4BB97CB1229B7E3D00989E3A /* GetVarName.h */,
+				4BB97CB2229B7E3D00989E3A /* GetVarName.m */,
+				4BB97CB4229B7E9600989E3A /* GetVarNameFromCursor.h */,
+				4BB97CB5229B7E9600989E3A /* GetVarNameFromCursor.m */,
+				4BB97CB7229B7F4A00989E3A /* GetVarNameFromSelection.h */,
+				4BB97CB8229B7F4A00989E3A /* GetVarNameFromSelection.m */,
+			);
+			path = GetVarName;
+			sourceTree = "<group>";
+		};
+		4BB97CBA229B874400989E3A /* GetClassName */ = {
+			isa = PBXGroup;
+			children = (
+				4BB97CBB229B876100989E3A /* GetClassName.h */,
+				4BB97CBC229B876100989E3A /* GetClassName.m */,
+			);
+			path = GetClassName;
+			sourceTree = "<group>";
+		};
+		4BB97CBE229B88FC00989E3A /* ReplaceHolder */ = {
+			isa = PBXGroup;
+			children = (
+				4BB97CBF229B896B00989E3A /* ReplaceHolder.h */,
+				4BB97CC0229B896B00989E3A /* ReplaceHolder.m */,
+			);
+			path = ReplaceHolder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,15 +556,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B947CBE2293ABB10067F633 /* BaseCommand.m in Sources */,
-				4B3BD10F22963EDA0021B9E3 /* FindVar.m in Sources */,
+				4BB97CC1229B896B00989E3A /* ReplaceHolder.m in Sources */,
 				4B2E292A2292A073004F2D99 /* ConfigInfo.m in Sources */,
+				4BB97CB3229B7E3D00989E3A /* GetVarName.m in Sources */,
 				4B947CBA22939F740067F633 /* ESharedUserDefault.m in Sources */,
+				4BB97CB6229B7E9600989E3A /* GetVarNameFromCursor.m in Sources */,
 				4B3BD1162297944C0021B9E3 /* VarNameModel.m in Sources */,
 				4B3BD113229642F20021B9E3 /* ReplaceCommand.m in Sources */,
 				4B2E2920229285F1004F2D99 /* ResetImportPort.m in Sources */,
 				4B2E290F229285B8004F2D99 /* SourceEditorExtension.m in Sources */,
 				4B2E292722929FA2004F2D99 /* HintComment.m in Sources */,
 				4B2E2912229285B8004F2D99 /* SourceEditorCommand.m in Sources */,
+				4BB97CBD229B876100989E3A /* GetClassName.m in Sources */,
+				4BB97CB9229B7F4A00989E3A /* GetVarNameFromSelection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wupeng.XCodePlugInDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -698,7 +746,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wupeng.XCodePlugInDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -790,7 +838,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev.EditorExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wupeng.XCodePlugInDev.EditorExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -809,7 +857,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.wupeng.XCodePlugInDev.EditorExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wupeng.XCodePlugInDev.EditorExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
