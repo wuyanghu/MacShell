@@ -11,7 +11,7 @@
 
 @interface ReplaceCommand()
 {
-    FindVar * _findVar;
+
 }
 @end
 
@@ -20,7 +20,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _findVar = [FindVar new];
+
     }
     return self;
 }
@@ -32,8 +32,8 @@
     if (selection.start.line > lines.count-1) {
         return;
     }
-    _findVar = [[FindVar alloc] initWithOrignalLines:lines selection:selection];
-    [_findVar findAndReplaceIfCondition];
+    FindVar * findVar = [[FindVar alloc] initWithOrignalLines:lines selection:selection];
+    [findVar findAndReplaceIfCondition];
     
 }
 

@@ -63,7 +63,7 @@
                 _orignalLines[i] = replacePlaceHolder;
             }
         }
-        if([orignal containsString:@"}"]){
+        if([orignal containsString:@"-"]){
             break;
         }
     }
@@ -228,6 +228,10 @@
         }
     }
     return prefix;
+}
+
+- (void)dealloc{
+    NSLog(@"findvar dealloc");
 }
 
 @end
