@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IReplaceCommand.h"
 @class XCSourceTextRange;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GetClassName : NSObject
-- (instancetype)initWithOrignalLines:(NSMutableArray *)orignalLines selection:(XCSourceTextRange *)selection;
+@interface GetClassName : NSObject<IReplaceCommand>
 - (NSString *)getClassNameFromVarName:(NSString *)varName;
 @end
 

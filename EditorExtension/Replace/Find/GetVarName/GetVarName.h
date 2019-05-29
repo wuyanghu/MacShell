@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <XcodeKit/XCSourceTextRange.h>
 #import "VarNameModel.h"
-
+#import "IReplaceCommand.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GetVarName : NSObject
-- (instancetype)initWithOrignalLines:(NSMutableArray *)orignalLines selection:(XCSourceTextRange *)selection;
+@interface GetVarName : NSObject<IReplaceCommand>
 - (NSString *)getPreFixFromVar:(NSString *)varName position:(NSInteger)position;
 - (XCSourceTextRange *)getSelection;
 - (NSMutableArray *)getOrignalLines;

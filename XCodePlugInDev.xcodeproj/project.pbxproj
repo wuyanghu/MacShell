@@ -122,6 +122,7 @@
 		4B947CBC2293ABB10067F633 /* BaseCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCommand.h; sourceTree = "<group>"; };
 		4B947CBD2293ABB10067F633 /* BaseCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCommand.m; sourceTree = "<group>"; };
 		4B947CBF2293AC000067F633 /* IBaseCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IBaseCommand.h; sourceTree = "<group>"; };
+		4BA3B903229BDEE6005B1295 /* IReplaceCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IReplaceCommand.h; sourceTree = "<group>"; };
 		4BB97CB1229B7E3D00989E3A /* GetVarName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetVarName.h; sourceTree = "<group>"; };
 		4BB97CB2229B7E3D00989E3A /* GetVarName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetVarName.m; sourceTree = "<group>"; };
 		4BB97CB4229B7E9600989E3A /* GetVarNameFromCursor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetVarNameFromCursor.h; sourceTree = "<group>"; };
@@ -281,6 +282,7 @@
 				4BB97CB0229B7E2200989E3A /* GetVarName */,
 				4B3BD1142297944C0021B9E3 /* VarNameModel.h */,
 				4B3BD1152297944C0021B9E3 /* VarNameModel.m */,
+				4BA3B903229BDEE6005B1295 /* IReplaceCommand.h */,
 			);
 			path = Find;
 			sourceTree = "<group>";
